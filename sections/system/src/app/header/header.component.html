@@ -1,0 +1,28 @@
+<section>
+  <nav class="navbar navbar-expand-lg navbar-dark configheader-menu">
+    <header-menu-brand></header-menu-brand>
+
+    <a routerLink="/home" class="chapter nav-link">Sistema</a>
+
+    <article class="collapse navbar-collapse" id="navigation">
+      <!-- ---- LEFT MENU --------- -->
+      <div *ngIf="!currentUser">
+        <app-header-menu-login></app-header-menu-login>
+      </div>
+
+      <div *ngIf="currentUser">
+        <app-system-header-menu-commands></app-system-header-menu-commands>
+      </div>
+
+      <!-- ---- LEFT MENU --------- -->
+      <div *ngIf="currentUser">
+        <app-system-header-menu-user></app-system-header-menu-user>
+      </div>
+
+      <!-- ---- RIGHT MENU --------- -->
+      <div class="navbar-nav ml-auto">
+        <header-menu-user [currentUser]="currentUser"></header-menu-user>
+      </div>
+    </article>
+  </nav>
+</section>
