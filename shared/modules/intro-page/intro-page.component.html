@@ -1,0 +1,92 @@
+<section id="intro" class="container intro">
+  <div class="intro-header">
+    <div class="intro-logo ">
+      <a href="{{ env.callcenterSite }}" target="blank">
+        <img src="{{ logo }}" class="img-fluid" />
+      </a>
+      <!-- <div class="btn btn-primary btn-md" *ngIf="!currentUser">
+        <button (click)="onLogin()">Login</button>
+        <button (click)="onRegister()"
+                *ngIf="env.autoregister">Registro</button>
+      </div> -->
+    </div>
+    <div>
+      <h3 class="display-2 mb-0">{{ title }}</h3>
+      <h2 class="display-4 mt-0">{{ env.callcenterSlogan }}</h2>
+      <p class="display-5">{{ env.callcenterName }} - {{ env.version }} -
+        {{version}}</p>
+    </div>
+  </div>
+</section>
+
+<section id="photo" class="container">
+  <div class="photo-grid">
+    <div>
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="index-title">
+              Servicios Entrantes
+            </p>
+          </div>
+        </div>
+        <div>
+          <a>
+            <img src={{img_01}} class="img-fluid" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="index-title">
+              Salientes Automáticos
+            </p>
+          </div>
+        </div>
+        <div>
+          <a>
+            <img src={{img_02}} class="img-fluid" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="index-title">
+              Salientes Manuales
+            </p>
+          </div>
+        </div>
+        <div>
+          <a>
+            <img src={{img_03}} class="img-fluid" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="index-title">
+              Gestion de personal
+            </p>
+          </div>
+        </div>
+        <div>
+          <a>
+            <img src={{img_04}} class="img-fluid" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

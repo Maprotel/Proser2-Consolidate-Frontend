@@ -1,0 +1,81 @@
+<!-- HEADER -->
+
+ <!-- ------------------------------------------ -->
+
+<app-alert [alertMessage]="alertMessage"></app-alert>
+
+<h3 class="h2 font-weight-normal text-center mt-3">Perfil de
+  usuario</h3>
+
+<section class="container" *ngIf="currentUser">
+
+  <article class="login-base">
+
+    <div class="login-columns">
+      <label class="login-label">id</label>
+      <p>{{ currentUser.id }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns ">
+      <label class="login-label">Nombre</label>
+      <p>{{ currentUser.firstname }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Apellido</label>
+      <p>{{ currentUser.lastname }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Perfil</label>
+      <p>{{ currentUser.profile }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Cédula</label>
+      <p>{{ currentUser.user_legal_id }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Identificación laboral</label>
+      <p>{{ currentUser.user_internal_id }}</p>
+    </div>
+    <hr />
+
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Nombre de usuario</label>
+      <p>{{ currentUser.username }}</p>
+    </div>
+    <hr />
+    <!-- --------------------------------------------- -->
+    <div class="login-columns">
+      <label class="login-label">Email</label>
+      <p>{{ currentUser.email }}</p>
+    </div>
+    <hr />
+  </article>
+</section>
+
+<!-- 
+<section id="profile" *ngIf="currentUser">
+
+  <div class="row">
+    <div class=" mx-auto">
+      <div class="">
+        <div class="card mt-3">
+          <div class="card-body">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section> -->
