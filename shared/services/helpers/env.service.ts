@@ -15,19 +15,14 @@ export class EnvService {
   public externalAssets = '/assets'
 
   public auditLink = this.host + '/proser_reports/dist/audit/'
-  public crudLink = this.host + '/proser_reports/dist/crud/'
-  public dashboardLink = this.host + '/proser_reports/dist/dashboard/'
-  public displayLink = this.host + '/proser_reports/dist/display/'
   public homeLink = this.host + '/proser_reports/dist/home/'
   public reportsLink = this.host + '/proser_reports/dist/reports/'
-  public smsLink = this.host + '/proser_reports/dist/sms/'
   public systemLink = this.host + '/proser_reports/dist/system/'
-  public userLink = this.host + '/proser_reports/dist/user/'
-  public viewLink = this.host + '/proser_reports/dist/view/'
+
 
   // API url
-  public loopbackApiUrl = "http://localhost:3151";
-  public systemApiUrl = "http://localhost:3152";
+  public loopbackApiUrl = "http://localhost:3153";
+  public systemApiUrl = "http://localhost:3153";
   public userApiUrl = "http://localhost:3153";
 
   // Version

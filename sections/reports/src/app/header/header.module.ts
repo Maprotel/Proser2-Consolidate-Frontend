@@ -9,10 +9,7 @@ import { HeaderComponent } from './header.component';
 
 
 
-import { HeaderMenuOperationComponent } from './header-menu-operation/header-menu-operation.component';
-import { HeaderMenuDataComponent } from './header-menu-data/header-menu-data.component';
-import { HeaderMenuCallsComponent } from './header-menu-calls/header-menu-calls.component';
-import { HeaderMenuAgentsComponent } from './header-menu-agents/header-menu-agents.component';
+import { HeaderMenuDataComponent } from './header-menu-data/header-menu-data.component';;
 
 import { HttpClientModule } from "@angular/common/http";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
@@ -26,10 +23,10 @@ import { HeaderMenuBrandModule } from "shared/modules/header-menu-brand/header-m
 import { HeaderMenuLoginComponent } from './header-menu-login/header-menu-login.component';
 
 @NgModule({
-  declarations: [HeaderComponent, HeaderMenuAgentsComponent,
-    HeaderMenuCallsComponent,
+  declarations: [HeaderComponent,
+
     HeaderMenuDataComponent,
-    HeaderMenuOperationComponent, HeaderMenuLoginComponent
+    HeaderMenuLoginComponent
   ],
   imports: [
     CommonModule,
@@ -45,10 +42,8 @@ import { HeaderMenuLoginComponent } from './header-menu-login/header-menu-login.
 
     HeaderRoutingModule
   ],
-  exports: [HeaderComponent, HeaderMenuAgentsComponent,
-    HeaderMenuCallsComponent,
+  exports: [HeaderComponent,
     HeaderMenuDataComponent,
-    HeaderMenuOperationComponent,
   ],
 })
 export class HeaderModule { }

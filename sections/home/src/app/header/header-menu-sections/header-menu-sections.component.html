@@ -12,19 +12,7 @@
 
 
       <div>
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item " href="{{displayLink}}">
-            <fa-icon [icon]="faDigitalTachograph"></fa-icon> &nbsp; Display
-          </a>
-        </li>
 
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item " href="{{dashboardLink}}">
-            <fa-icon [icon]="faChartArea"></fa-icon> &nbsp; Dashboard
-          </a>
-        </li>
 
         <!-- MENU ITEM-->
         <li role="menuitem">
@@ -37,12 +25,6 @@
       <div *ngIf="showInMenu >= 5">
         <!-- DIVIDER-->
         <li class="divider dropdown-divider"></li>
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item " href="{{crudLink}}">
-            <fa-icon [icon]="faMarker"></fa-icon>&nbsp; Configuración
-          </a>
-        </li>
 
         <!-- MENU ITEM-->
         <li role="menuitem">
@@ -71,12 +53,7 @@
       <div *ngIf="showInMenu >= 7">
         <!-- DIVIDER-->
         <li class="divider dropdown-divider"></li>
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item " href="{{viewLink}}">
-            <fa-icon [icon]="faLaptop"></fa-icon> &nbsp; Vistas
-          </a>
-        </li>
+
       </div>
 
 
@@ -84,28 +61,13 @@
       <div>
         <!-- DIVIDER-->
         <li class="divider dropdown-divider"></li>
-
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item" href="{{userLink}}">
-            <fa-icon [icon]="faUserTie"></fa-icon> &nbsp; Usuario
-          </a>
-        </li>
       </div>
 
       <div *ngIf="showInMenu >= 20">
         <!-- DIVIDER-->
         <li class="divider dropdown-divider"></li>
 
-        <!-- MENU ITEM-->
-        <li role="menuitem">
-          <a class="dropdown-item" href="{{testLink}}">
-            <fa-icon [icon]="faUserTie"></fa-icon> &nbsp; Test
-          </a>
-        </li>
       </div>
-
-
 
 
       <div>
