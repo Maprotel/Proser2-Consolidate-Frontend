@@ -1,4 +1,14 @@
-<app-reports-call-entry-report-list
-[userSelection]="userSelection" [selectorVisibleFields]="selectorVisibleFields"
->
+<div>
+  <app-alert [alertMessage]="alertMessage"></app-alert>
+</div>
+
+<app-reports-report-header [userSelection]="userSelection">
+</app-reports-report-header>
+
+<app-reports-call-entry-report-list [userSelection]="userSelection"
+                                    [selectorVisibleFields]="selectorVisibleFields">
 </app-reports-call-entry-report-list>
+
+<app-reports-call-entry-selector>
+
+</app-reports-call-entry-selector>

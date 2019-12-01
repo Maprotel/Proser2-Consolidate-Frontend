@@ -1,6 +1,8 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CallEntryReportComponent } from './call-entry-report.component';
+import { CallEntrySelectorComponent } from './call-entry-selector/call-entry-selector.component';
 
 
 const routes: Routes = [

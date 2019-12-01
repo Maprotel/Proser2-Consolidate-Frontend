@@ -32,19 +32,16 @@ import groupList from "shared/data/selector-group-list.data";
   styleUrls: ["./selector.component.scss"]
 })
 export class SelectorComponent implements OnInit, OnDestroy {
-  @Output() closeModal = new EventEmitter();
+  @Output() closeModal: EventEmitter<any> = new EventEmitter();
   @Output() userSelectionBack: EventEmitter<any> = new EventEmitter();
   @Output() closeSelector: EventEmitter<any> = new EventEmitter();
 
   @Input() userSelection: UserSelectionModel;
   @Input() selectorVisibleFields: UserSelectionModel;
+  @Input() menuOptions: UserSelectionModel;
   @Input() selectorVisibleAreas;
 
   jsonSelector = false;
-
-  // time
-  start_time_text = "00:00:00";
-  end_time_text = "23:59:59";
 
   action;
 
@@ -66,9 +63,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
   incomingUserSelection: UserSelectionModel;
 
-  // list;
-  menuOptions: UserSelectionModel;
-
   // groupList;
 
   constructor(
@@ -88,33 +82,12 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (!this.selectorVisibleAreas) {
-      this.selectorVisibleAreas = {
-        date: true,
-        interval: true,
-        options: true,
-        buttons: true,
-      }
-    }
-
-
-    this.menuOptions = JSON.parse(localStorage.getItem("menuOptions"));
-
-    this.getUserSelectionMenus();
-
-    this.previousUserSelection = this.userSelection;
     this.onFillForm(this.userSelection);
     this.onChange()
   }
 
   onReset() {
-    this.userSelection = new UserSelectionModel("standard");
-    this.userSelection.title = this.previousUserSelection.title;
-    this.userSelection.mode = this.previousUserSelection.mode;
-
     this.onFillForm(this.userSelection);
-
-    this.onSaveUserSelection(this.userSelection);
   }
 
   onCloseModal() {
@@ -136,9 +109,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   onAllDay() {
-    this.start_time_text = "00:00:00";
-    this.end_time_text = "23:59:59";
-
     this.selectorForm.patchValue({
       start_time_hour: {
         hour: 0,
@@ -165,17 +135,14 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.onSaveUserSelection(this.userSelection);
     this.closeSelector.emit("redraw");
   }
 
   onFillForm(currentSelection) {
     if (currentSelection) {
-      this.start_time_text = objectTimeToTextTime(
-        currentSelection.start_time_hour
-      );
-
-      this.end_time_text = objectTimeToTextTime(currentSelection.end_time_hour);
+      // this.start_time_text = objectTimeToTextTime(
+      //   currentSelection.start_time_hour
+      // );
 
       this.selectorForm = this.formBuilder.group({
         title: [currentSelection.title],
@@ -234,7 +201,8 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(currentSelection) {
-    this.onSaveUserSelection(currentSelection);
+    console.log('currentSelection', currentSelection);
+
   }
 
 
@@ -247,7 +215,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.userSelection.start_date = this.selectorForm.value.start_date;
     this.userSelection.end_date = this.selectorForm.value.end_date;
 
-    this.onSaveUserSelection(this.selectorForm.value);
     this.onChange();
   }
 
@@ -255,7 +222,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
   onNewEndDate() {
     this.userSelection.start_date = this.selectorForm.value.start_date;
     this.userSelection.end_date = this.selectorForm.value.end_date;
-    this.onSaveUserSelection(this.selectorForm.value);
     this.onChange();
   }
 
@@ -267,20 +233,15 @@ export class SelectorComponent implements OnInit, OnDestroy {
       legend: selectorLegendSubtitles(this.selectorForm.value)
     });
     this.userSelectionBack.emit(this.selectorForm.value);
-    this.onSaveUserSelection(this.selectorForm.value);
   }
 
 
 
   onChangeStartTime() {
-    this.start_time_text = objectTimeToTextTime(
-      this.selectorForm.value.start_time_hour
-    );
-
     this.selectorForm.patchValue({
       start_time: {
         id: 0,
-        value: this.start_time_text
+        // value: this.start_time_text
       }
     });
 
@@ -288,14 +249,10 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   onChangeEndTime() {
-    this.end_time_text = objectTimeToTextTime(
-      this.selectorForm.value.end_time_hour
-    );
-
     this.selectorForm.patchValue({
       end_time: {
         id: 0,
-        value: this.end_time_text
+        // value: this.end_time_text
       }
     });
     this.onChange();
@@ -335,8 +292,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
   onLastMinutes() {
     this.onAllDay();
-    this.onSaveUserSelection(this.selectorForm.value);
-
     let mode = [{ id: 0, name: "Actual" }];
     let start_date = dateToDatePicker(moment().format("YYYY-MM-DD"));
     let end_date = dateToDatePicker(moment().format("YYYY-MM-DD"));
@@ -382,11 +337,9 @@ export class SelectorComponent implements OnInit, OnDestroy {
       this.selectorVisibleFields.start_time = true;
       this.selectorVisibleFields.end_time = true;
     }
-    this.onSaveUserSelection(this.selectorForm.value);
   }
 
   onStatusChange() {
-    this.onSaveUserSelection(this.selectorForm.value);
     this.onChange();
   }
 
@@ -413,6 +366,7 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.alertMessage.alertClass =
       "alert alert-danger alert-dismissible fade show";
   }
+
   closeModalMsg() {
     this.closeSelector.emit("closeSelector");
   }
@@ -421,19 +375,5 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.jsonSelector = !this.jsonSelector;
   }
 
-  onSaveUserSelection(userSelection) {
-    if (this.userSelection.mode.value === "actual") {
-      this.userSelectionService.writeUserSelectionCurrent(userSelection);
-    } else {
-      this.userSelectionService.writeUserSelectionHistoric(userSelection);
-    }
-  }
 
-  onReadUserSelection() {
-    if (this.userSelection.mode.value === "actual") {
-      this.userSelectionService.readUserSelectionCurrent();
-    } else {
-      this.userSelectionService.readUserSelectionHistoric();
-    }
-  }
 }

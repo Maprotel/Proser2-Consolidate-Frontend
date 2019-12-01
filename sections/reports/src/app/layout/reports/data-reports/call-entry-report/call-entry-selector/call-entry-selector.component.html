@@ -1,0 +1,6 @@
+<app-selector [userSelection]="userSelection"
+              [selectorVisibleFields]="selectorVisibleFields"
+              (userSelectionBack)="updateSelection($event, 'userSelectionBack')"
+              (closeSelector)="closeSelector($event)"
+              (closeModal)="onCloseModal($event, 'closeModal')">
+</app-selector>

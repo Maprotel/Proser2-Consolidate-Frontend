@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { AlertModel } from "shared/models/helpers/Alert";
-import { AlertService } from "shared/services";
-
 import { getUpdateFilter } from "shared/functions";
+
+import { AlertModel } from "shared/models/helpers/Alert";
 
 import {
   NgbModal,
@@ -12,18 +11,28 @@ import {
   NgbModalRef
 } from "@ng-bootstrap/ng-bootstrap";
 
-import { UserSelectionService } from "shared/services/crud/system/user-selection.service";
-
-import { UserSelectionModel } from "shared/models";
+import {
+  UserSelectionModel
+} from "shared/models";
 
 import {
   objectDateToTextDate,
   textDateToObjectDate
 } from "shared/functions";
 
-import { ExcelService } from 'sections/reports/src/shared/services';
-import { MainCallEntryService } from "sections/reports/src/shared/services/reports/data/reports-main-call-entry.service";
-import { MainCallEntryReportModel } from "sections/reports/src/shared/models/reports/data/MainCallEntryReport.model";
+import {
+  AlertService,
+  EnvService,
+  UserSelectionService
+} from "shared/services";
+
+import {
+  ExcelService, MainCallEntryService
+} from 'sections/reports/src/shared/services';
+
+import {
+  MainCallEntryReportModel
+} from "sections/reports/src/shared/models/reports/data/MainCallEntryReport.model";
 
 @Component({
   selector: "app-reports-call-entry-report-list",
@@ -92,7 +101,7 @@ export class CallEntryReportListComponent implements OnInit {
   ngOnDestroy() {
     this.userSelectionService.writeUserSelectionHistoric(
       this.userSelection,
-      
+
     );
   }
 
@@ -176,7 +185,7 @@ export class CallEntryReportListComponent implements OnInit {
     return output;
   }
 
-  onChange() {}
+  onChange() { }
 
   openModal(content) {
     this.activeModal = this.modalService.open(content, {
@@ -235,12 +244,12 @@ export class CallEntryReportListComponent implements OnInit {
     const filterData = data.map(x => {
       return {
 
-       id: x.callentry_id,
-       agente_id: x.callentry_agent_id,
-       cola_id: x.callentry_queue_id,
-       agente: x.inv_agent_name,
-       cola: x.inv_queue_number,
-       supervisor: x.agent_supervisor_name,
+        id: x.callentry_id,
+        agente_id: x.callentry_agent_id,
+        cola_id: x.callentry_queue_id,
+        agente: x.inv_agent_name,
+        cola: x.inv_queue_number,
+        supervisor: x.agent_supervisor_name,
         id_llamante: x.callentry_contact_id,
         llamante: x.callentry_callerid,
         inicio: x.callentry_datetime_init,

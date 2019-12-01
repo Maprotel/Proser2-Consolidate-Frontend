@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
 import { AlertModel } from "shared/models/helpers/Alert";
+
 import {
   AlertService,
   EnvService,
@@ -14,9 +15,13 @@ import { UserSelectionModel } from "shared/models";
   styleUrls: ["./call-entry-report.component.scss"]
 })
 export class CallEntryReportComponent implements OnInit {
+
+
   userSelection: UserSelectionModel;
   selectorVisibleFields: UserSelectionModel;
   title;
+
+  alertMessage = new AlertModel();
 
   constructor(
     private alertService: AlertService,
