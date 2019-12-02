@@ -10,10 +10,16 @@
 <div>
 
   <div>
-    <button (click)="getResumeStats(userSelection)">Stats</button>
-    <button (click)="getReportList(userSelection)">Data</button>
+
+    <button (click)="getResumeStats(userSelection)"
+            class="btn btn-outline-primary">Stats</button>
+
+    <button (click)="getReportList(userSelection)"
+            class="btn btn-outline-primary">Data</button>
+
     <button (click)="exportToExcel(rows)"
             class="btn btn-outline-primary">Exportar excel</button>
+
   </div>
 
 </div>

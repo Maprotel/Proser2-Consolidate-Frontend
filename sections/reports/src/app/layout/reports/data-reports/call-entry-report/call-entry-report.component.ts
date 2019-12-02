@@ -14,6 +14,8 @@ import {
   ExcelService, MainCallEntryService
 } from 'sections/reports/src/shared/services';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: "app-reports-call-entry-report",
   templateUrl: "./call-entry-report.component.html",
@@ -55,6 +57,7 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(_.isEmpty({})); // returns true
     this.userSelectionHistoric();
   }
   setReportTitles() {
@@ -127,14 +130,21 @@ export class CallEntryReportComponent implements OnInit {
         (res) => {
           this.show_callentry = false;
 
-          if (Array.isArray(res)) {
-            this.rows = res;
-            this.show_callentry = true;
-            console.log('this.rows', this.rows);
+          let temp = res;
+          this.show_callentry = true;
+          console.log('temp', temp);
 
-          } else {
-            console.error("Error", res);
-          }
+          let array = []
+
+          this.rows = _.concat(
+            array,
+            res.CallEntryEmergencia,
+            res.CallEntryAps,
+            res.CallEntryAmd
+          );
+
+          console.log('this.rows', this.rows);
+
           this.alertMessage = new AlertModel();
         },
         error => {
