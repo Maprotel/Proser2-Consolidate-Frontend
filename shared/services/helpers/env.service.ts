@@ -21,9 +21,9 @@ export class EnvService {
 
 
   // API url
-  public loopbackApiUrl = "http://localhost:3153";
-  public systemApiUrl = "http://localhost:3153";
-  public userApiUrl = "http://localhost:3153";
+  public loopbackApiUrl = "http://localhost:3161";
+  public systemApiUrl = "http://localhost:3161";
+  public userApiUrl = "http://localhost:3161";
 
   // Version
   public version = "1.0.1";

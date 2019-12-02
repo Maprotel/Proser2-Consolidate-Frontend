@@ -2,17 +2,22 @@
   <app-alert [alertMessage]="alertMessage"></app-alert>
 </div>
 
-<app-reports-report-header [userSelection]="userSelection">
+<app-reports-report-header [userSelection]="userSelection"
+                           (openSelector)="onOpenSelector($event)">
 </app-reports-report-header>
 
-<app-reports-call-entry-report-list [userSelection]="userSelection">
-</app-reports-call-entry-report-list>
 
-<app-selector [userSelection]="userSelection"
-              [selectorVisibleFields]="selectorVisibleFields"
-              [menuOptions]="menuOptions"
-              [selectorVisibleAreas]="selectorVisibleAreas"
-              (userSelectionBack)="updateSelection($event, 'userSelectionBack')">
-</app-selector>
+<div *ngIf="stats">
 
-{{ userSelection | json}}
+</div>
+
+
+<div *ngIf="show_selector">
+  <app-selector [userSelection]="userSelection"
+                [selectorVisibleFields]="selectorVisibleFields"
+                [menuOptions]="menuOptions"
+                [selectorVisibleAreas]="selectorVisibleAreas"
+                (closeSelector)="onCloseSelector($event)"
+                (cancelSelector)="onCancelSelector($event)">
+  </app-selector>
+</div>

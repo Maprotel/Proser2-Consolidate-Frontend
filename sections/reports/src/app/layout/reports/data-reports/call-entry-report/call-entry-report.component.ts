@@ -20,28 +20,24 @@ export class CallEntryReportComponent implements OnInit {
   userSelection: UserSelectionModel;
   selectorVisibleFields: UserSelectionModel;
   menuOptions: UserSelectionModel;
+  userSelectionTemp: UserSelectionModel;
   selectorVisibleAreas;
+
   title;
 
-  alertMessage = new AlertModel();
+  alertMessage: AlertModel = new AlertModel();
+
+  show_selector: boolean = false;
+
+  // Data
+  stats;
 
   constructor(
     private alertService: AlertService,
     private envService: EnvService,
     private userSelectionService: UserSelectionService
   ) {
-    this.userSelection = new UserSelectionModel('standard')
-    this.selectorVisibleFields = new UserSelectionModel("visible");
-    this.selectorVisibleFields.start_time = false
-    this.selectorVisibleFields.end_time = false
-    this.menuOptions = new UserSelectionModel("menuOptions");
-    this.selectorVisibleAreas = {
-      date: true,
-      interval: false,
-      options: false,
-      buttons: false,
-    }
-    this.title = "Registro de entrada de llamadas";
+
   }
 
   ngOnInit() {
@@ -59,6 +55,20 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   userSelectionHistoric() {
+
+    this.userSelection = new UserSelectionModel('standard')
+    this.selectorVisibleFields = new UserSelectionModel("visible");
+    this.selectorVisibleFields.start_time = false
+    this.selectorVisibleFields.end_time = false
+    this.menuOptions = new UserSelectionModel("menuOptions");
+    this.selectorVisibleAreas = {
+      date: true,
+      interval: false,
+      options: false,
+      buttons: false,
+    }
+    this.title = "Registro de entrada de llamadas";
+
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.selectorVisibleFields.groupBy = false;
     this.selectorVisibleFields.interval = false;
@@ -71,5 +81,24 @@ export class CallEntryReportComponent implements OnInit {
     this.userSelection.mode = { id: 1, name: "Histórico", value: "historic" };
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
+  }
+
+  onOpenSelector(event) {
+    console.log('event back', event);
+    this.userSelectionTemp = this.userSelection
+    this.show_selector = true
+    this.userSelection = this.userSelectionService.readUserSelectionHistoric();
+  }
+
+  onCloseSelector(event) {
+    console.log('event back', event);
+    this.show_selector = false
+    this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
+  }
+
+  onCancelSelector() {
+    console.log('event back', event);
+    this.show_selector = false;
+    this.userSelection = this.userSelectionTemp;
   }
 }

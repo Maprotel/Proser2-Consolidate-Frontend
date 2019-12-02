@@ -19,6 +19,7 @@ import {
 })
 export class ReportHeaderComponent implements OnInit {
   @Output() returnResult = new EventEmitter();
+  @Output() openSelector = new EventEmitter();
 
   @Input() userSelection;
   @Input() selectorVisibleFields;
@@ -51,5 +52,8 @@ export class ReportHeaderComponent implements OnInit {
   updateSelection(event, userSelectionBack) {
   }
 
+  onOpenSelector(event) {
+    this.openSelector.emit('openSelector')
+  }
 
 }

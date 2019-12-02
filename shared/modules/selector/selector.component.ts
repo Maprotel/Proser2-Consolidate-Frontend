@@ -34,7 +34,9 @@ import groupList from "shared/data/selector-group-list.data";
 export class SelectorComponent implements OnInit, OnDestroy {
   @Output() closeModal: EventEmitter<any> = new EventEmitter();
   @Output() userSelectionBack: EventEmitter<any> = new EventEmitter();
+
   @Output() closeSelector: EventEmitter<any> = new EventEmitter();
+  @Output() cancelSelector: EventEmitter<any> = new EventEmitter();
 
   @Input() userSelection: UserSelectionModel;
   @Input() selectorVisibleFields: UserSelectionModel;
@@ -102,8 +104,8 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.closeModal.emit("close");
   }
 
-  onCancel() {
-    this.closeModal.emit("close");
+  onCancelSelector() {
+    this.cancelSelector.emit("cancelSelector");
   }
 
   onAllDay() {
@@ -201,7 +203,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
   onSubmit(currentSelection) {
     console.log('closeSelector');
     this.closeSelector.emit('closeSelector');
-
   }
 
   onNewStartDate() {

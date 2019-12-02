@@ -28,10 +28,11 @@ import { ReportFinderModule } from "sections/reports/src/shared/modules/report-f
 import { ExcelService } from 'sections/reports/src/shared/services';
 import { CallEntrySelectorComponent } from './call-entry-selector/call-entry-selector.component';
 import { CallEntrySubheaderComponent } from './call-entry-subheader/call-entry-subheader.component';
+import { CallEntryStatsComponent } from './call-entry-stats/call-entry-stats.component';
 
 
 @NgModule({
-  declarations: [CallEntryReportComponent, CallEntryReportListComponent, CallEntrySelectorComponent, CallEntrySubheaderComponent],
+  declarations: [CallEntryReportComponent, CallEntryReportListComponent, CallEntrySelectorComponent, CallEntrySubheaderComponent, CallEntryStatsComponent],
   imports: [
     CommonModule,
 

@@ -20,37 +20,11 @@
 
   <!-- ------- INFO -------------------- -->
   <article class="header-right">
+    <p>
+      <a class="selector-text-link" (click)="onOpenSelector($event)">
+        Filtre la información aquí</a>
+    </p>
+
     <p class="report-selection">{{ userSelection.options }}</p>
   </article>
 </section>
-
-
-
-<!-- MODAL WINDOW FOR SELECTOR ---------------------------------------------------- -->
-<!-- <ng-template #currentCalls class="modal-full">
-  <div class="modal-header modal-primary">
-    <p class="modal-title ">Seleccione las opciones el reporte</p>
-
-    <div>
-
-
-      <button type="button" class="btn btn-danger text-lg-center "
-              (click)="activeModal.close()">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-  </div>
-
-
-
-  <div class="" id="result">
-    <app-selector [userSelection]="userSelection"
-                  [selectorVisibleFields]="selectorVisibleFields"
-                  (userSelectionBack)="updateSelection($event, 'userSelectionBack')"
-                  (closeSelector)="closeSelector($event)"
-                  (closeModal)="onCloseModal($event, 'closeModal')">
-    </app-selector>
-  </div>
-</ng-template> -->
-
-<!-- closeSelector($event) -->
