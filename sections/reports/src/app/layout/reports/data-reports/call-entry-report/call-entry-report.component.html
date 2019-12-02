@@ -7,6 +7,20 @@
 </app-reports-report-header>
 
 
+<div>
+
+  <div>
+    <button (click)="getResumeStats(userSelection)">Stats</button>
+    <button (click)="getReportList(userSelection)">Data</button>
+    <button (click)="exportToExcel(rows)"
+            class="btn btn-outline-primary">Exportar excel</button>
+  </div>
+
+</div>
+
+
+
+
 <div *ngIf="stats">
 
 </div>

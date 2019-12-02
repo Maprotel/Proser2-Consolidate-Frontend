@@ -70,10 +70,10 @@ export class CallEntryReportListComponent implements OnInit {
 
   constructor(
     private mainCallEntryService: MainCallEntryService,
+    private excelService: ExcelService,
     private alertService: AlertService,
     private modalService: NgbModal,
     private userSelectionService: UserSelectionService,
-    private excelService: ExcelService
   ) {
     this.model = new MainCallEntryReportModel();
     this.local_store = "assignation";

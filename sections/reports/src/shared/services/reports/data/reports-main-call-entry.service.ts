@@ -13,7 +13,7 @@ import { UserSelectionModel, MainCallEntryModel } from "shared/models";
   providedIn: "root"
 })
 export class MainCallEntryService {
-  constructor(private http: HttpClient, private env: EnvService) {}
+  constructor(private http: HttpClient, private env: EnvService) { }
 
   headers: HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json"
@@ -28,7 +28,9 @@ export class MainCallEntryService {
     const accessToken = localStorage.getItem("accessToken");
     const url_api = `${
       this.env.loopbackApiUrl
-    }/api/InvReports/mainCallEntryReport?access_token=${accessToken}`;
+      }/api/InvReports/mainCallEntryReport?access_token=${accessToken}`;
+
+    console.log('url_api', url_api)
     const res = this.http
       .post(url_api, userSelection, {
         headers: this.headers
@@ -39,4 +41,23 @@ export class MainCallEntryService {
       );
     return res;
   }
+
+  getResumeStats(userSelection: UserSelectionModel): Observable<any> {
+    const accessToken = localStorage.getItem("accessToken");
+    const url_api = `${
+      this.env.loopbackApiUrl
+      }/api/InvReports/mainStatsReport?access_token=${accessToken}`;
+
+    console.log('url_api', url_api)
+    const res = this.http
+      .post(url_api, userSelection, {
+        headers: this.headers
+      })
+      .pipe(
+        map(data => data),
+        catchError(this.handleError)
+      );
+    return res;
+  }
+
 }
