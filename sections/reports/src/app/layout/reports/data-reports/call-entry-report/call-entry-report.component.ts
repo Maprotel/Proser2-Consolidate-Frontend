@@ -19,6 +19,8 @@ export class CallEntryReportComponent implements OnInit {
 
   userSelection: UserSelectionModel;
   selectorVisibleFields: UserSelectionModel;
+  menuOptions: UserSelectionModel;
+  selectorVisibleAreas;
   title;
 
   alertMessage = new AlertModel();
@@ -28,7 +30,17 @@ export class CallEntryReportComponent implements OnInit {
     private envService: EnvService,
     private userSelectionService: UserSelectionService
   ) {
+    this.userSelection = new UserSelectionModel('standard')
     this.selectorVisibleFields = new UserSelectionModel("visible");
+    this.selectorVisibleFields.start_time = false
+    this.selectorVisibleFields.end_time = false
+    this.menuOptions = new UserSelectionModel("menuOptions");
+    this.selectorVisibleAreas = {
+      date: true,
+      interval: false,
+      options: false,
+      buttons: false,
+    }
     this.title = "Registro de entrada de llamadas";
   }
 

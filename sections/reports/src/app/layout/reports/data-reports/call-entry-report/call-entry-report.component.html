@@ -5,10 +5,14 @@
 <app-reports-report-header [userSelection]="userSelection">
 </app-reports-report-header>
 
-<app-reports-call-entry-report-list [userSelection]="userSelection"
-                                    [selectorVisibleFields]="selectorVisibleFields">
+<app-reports-call-entry-report-list [userSelection]="userSelection">
 </app-reports-call-entry-report-list>
 
-<app-reports-call-entry-selector>
+<app-selector [userSelection]="userSelection"
+              [selectorVisibleFields]="selectorVisibleFields"
+              [menuOptions]="menuOptions"
+              [selectorVisibleAreas]="selectorVisibleAreas"
+              (userSelectionBack)="updateSelection($event, 'userSelectionBack')">
+</app-selector>
 
-</app-reports-call-entry-selector>
+{{ userSelection | json}}

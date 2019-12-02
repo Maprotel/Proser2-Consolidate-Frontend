@@ -24,11 +24,7 @@ export class ReportHeaderComponent implements OnInit {
   @Input() selectorVisibleFields;
 
   activeModal: NgbActiveModal;
-  local_store;
   env;
-
-  rows;
-  rows_original;
 
   constructor(
     private envService: EnvService,
@@ -36,8 +32,6 @@ export class ReportHeaderComponent implements OnInit {
     private userSelectionService: UserSelectionService
   ) {
     this.env = this.envService;
-    this.userSelection = new UserSelectionModel("standard");
-    this.local_store = "assignation";
   }
 
   ngOnInit() {
@@ -53,33 +47,9 @@ export class ReportHeaderComponent implements OnInit {
     return data;
   }
 
-  openDetailModal(content) {
-    this.activeModal = this.modalService.open(content, {
-      windowClass: "my-class",
-      keyboard: false
-    });
-  }
-
-  onCloseModal(event, closeModal) {
-    this.activeModal.close();
-  }
 
   updateSelection(event, userSelectionBack) {
-    this.userSelection = this.userSelectionService.readUserSelectionHistoric(
-      this.local_store
-    );
   }
 
-  closeSelector($event) {
-    this.userSelection = this.userSelectionService.readUserSelectionHistoric(
-      this.local_store
-    );
 
-    this.returnResult.emit({
-      userSelection: this.userSelection,
-      rows: this.rows,
-      rows_original: this.rows_original
-    });
-    this.ngOnInit();
-  }
 }

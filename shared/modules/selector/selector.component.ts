@@ -43,6 +43,10 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
   jsonSelector = false;
 
+  // time
+  start_time_text = "00:00:00";
+  end_time_text = "23:59:59";
+
   action;
 
   alertMessage: AlertModel;
@@ -99,12 +103,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    let proser_historic = {
-      userSelection: new UserSelectionModel()
-    };
-    proser_historic.userSelection = this.previousUserSelection;
-    this.onChange();
-    localStorage.setItem("proser_historic", JSON.stringify(proser_historic));
     this.closeModal.emit("close");
   }
 
@@ -201,11 +199,10 @@ export class SelectorComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(currentSelection) {
-    console.log('currentSelection', currentSelection);
+    console.log('closeSelector');
+    this.closeSelector.emit('closeSelector');
 
   }
-
-
 
   onNewStartDate() {
     this.selectorForm.patchValue({
@@ -232,16 +229,14 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.selectorForm.patchValue({
       legend: selectorLegendSubtitles(this.selectorForm.value)
     });
-    this.userSelectionBack.emit(this.selectorForm.value);
+    // this.userSelectionBack.emit(this.selectorForm.value);
   }
-
-
 
   onChangeStartTime() {
     this.selectorForm.patchValue({
       start_time: {
         id: 0,
-        // value: this.start_time_text
+        value: this.start_time_text
       }
     });
 
@@ -252,7 +247,7 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.selectorForm.patchValue({
       end_time: {
         id: 0,
-        // value: this.end_time_text
+        value: this.end_time_text
       }
     });
     this.onChange();
@@ -349,8 +344,10 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.userSelectionService
       .getUserSelectionMenus(this.selection)
       .subscribe(data => {
+
         this.menuOptions = data;
-        localStorage.setItem("menuOptions", JSON.stringify(this.menuOptions));
+        console.log('this. menuOptions', this.menuOptions);
+
         error => {
           this.onError(error);
         };

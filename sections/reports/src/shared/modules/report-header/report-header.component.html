@@ -20,12 +20,6 @@
 
   <!-- ------- INFO -------------------- -->
   <article class="header-right">
-    <p><a class="selector-text-link"
-         (click)="openDetailModal(currentCalls)">Filtre
-        la
-        información aquí</a></p>
-    <span *ngIf="userSelection.mode.name === 'Historic'">Histórico - &nbsp;
-    </span>
     <p class="report-selection">{{ userSelection.options }}</p>
   </article>
 </section>
@@ -33,7 +27,7 @@
 
 
 <!-- MODAL WINDOW FOR SELECTOR ---------------------------------------------------- -->
-<ng-template #currentCalls class="modal-full">
+<!-- <ng-template #currentCalls class="modal-full">
   <div class="modal-header modal-primary">
     <p class="modal-title ">Seleccione las opciones el reporte</p>
 
@@ -57,6 +51,6 @@
                   (closeModal)="onCloseModal($event, 'closeModal')">
     </app-selector>
   </div>
-</ng-template>
+</ng-template> -->
 
 <!-- closeSelector($event) -->
