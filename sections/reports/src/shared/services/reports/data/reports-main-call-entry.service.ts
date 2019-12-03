@@ -26,9 +26,11 @@ export class MainCallEntryService {
 
   getReportList(userSelection: UserSelectionModel): Observable<any> {
     const accessToken = localStorage.getItem("accessToken");
+
     const url_api = `${
       this.env.loopbackApiUrl
       }/api/InvReports/mainCallEntryReport?access_token=${accessToken}`;
+
 
     console.log('url_api', url_api)
     const res = this.http
@@ -43,7 +45,8 @@ export class MainCallEntryService {
   }
 
   getResumeStats(userSelection: UserSelectionModel): Observable<any> {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");;
+
     const url_api = `${
       this.env.loopbackApiUrl
       }/api/InvReports/mainStatsReport?access_token=${accessToken}`;
@@ -51,6 +54,26 @@ export class MainCallEntryService {
     console.log('url_api', url_api)
     const res = this.http
       .post(url_api, userSelection, {
+        headers: this.headers
+      })
+      .pipe(
+        map(data => data),
+        catchError(this.handleError)
+      );
+    return res;
+  }
+
+
+  ping(): Observable<any> {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const url_api = `${
+      this.env.loopbackApiUrl
+      }/api/InvReports/ping?access_token=${accessToken}`;
+
+    console.log('url_api', url_api)
+    const res = this.http
+      .post(url_api, {
         headers: this.headers
       })
       .pipe(

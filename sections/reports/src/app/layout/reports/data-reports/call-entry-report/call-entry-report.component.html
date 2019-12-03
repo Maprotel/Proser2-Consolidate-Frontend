@@ -7,27 +7,112 @@
 </app-reports-report-header>
 
 
-<div>
+<section class="container">
+  <h2>Pasos a seguir para exportar</h2>
+</section>
+
+<section class="container four-panels">
+
+  <div>
+    <button (click)="onPing()" class="btn btn-outline-primary">Validar
+      conexión</button>
+
+    <p class="h4">{{msg_connection}}</p>
+
+    <!-- <p class="small">{{ping | json}}</p> -->
+    <div class="container" *ngIf="ping">
+
+      <h3> Consolidado</h3>
+      <h4> <span>{{ping.Consolidado}}</span> &nbsp; Consolidado</h4>
+
+      <h3>Reportería</h3>
+      <h4> <span>{{ping.Emergencia_reporteria}}</span> &nbsp; Emergencia</h4>
+      <h4> <span>{{ping.Aps_reporteria}}</span> &nbsp; Aps</h4>
+      <h4> <span>{{ping.Amd_reporteria}}</span> &nbsp; Amd</h4>
+
+      <h3>Call centers</h3>
+      <h4> <span>{{ping.Emergencia_call}}</span> &nbsp; Emergencia</h4>
+      <h4> <span>{{ping.Aps_call}}</span> &nbsp; Aps</h4>
+      <h4> <span>{{ping.Amd_call}}</span> &nbsp; Amd</h4>
+    </div>
+  </div>
+
+
 
   <div>
 
     <button (click)="getResumeStats(userSelection)"
-            class="btn btn-outline-primary">Stats</button>
+            class="btn btn-outline-primary" *ngIf="ping">Validar
+      información</button>
 
-    <button (click)="getReportList(userSelection)"
-            class="btn btn-outline-primary">Data</button>
+    <p class="h4">{{msg_information}}</p>
 
-    <button (click)="exportToExcel(rows)"
-            class="btn btn-outline-primary">Exportar excel</button>
+    <div class="container" *ngIf="stats && show_stats">
+
+      <app-reports-call-entry-stats [stats]="stats" [show_stats]="show_stats">
+      </app-reports-call-entry-stats>
+    </div>
 
   </div>
 
-</div>
+
+
+  <div *ngIf="stats && show_stats">
+    <button (click)="getReportList(userSelection)"
+            class="btn btn-outline-primary">Obtener los datos</button>
+
+    <p class="h4">{{msg_data}}</p>
+
+    <div>
+      <table class="data-table" *ngIf="rows && rows_count">
+        <tr>
+          <td class="h4">Emergencia</td>
+          <td class="h4 text-right">
+            {{ stats.reportsEmergencia[0].callentry_count }}</td>
+        </tr>
+
+        <tr>
+          <td class="h4">Aps</td>
+          <td class="h4 text-right">{{ stats.reportsAps[0].callentry_count }}
+          </td>
+        </tr>
+        <tr>
+          <td class="h4">AMD</td>
+          <td class="h4 text-right">{{ stats.reportsAmd[0].callentry_count }}
+          </td>
+        </tr>
+        <tr>
+          <td class="h4">Total</td>
+          <td class="h4 text-right">{{rows_count}}</td>
+        </tr>
+      </table>
+    </div>
+
+
+  </div>
+
+  <div *ngIf="show_callentry">
+
+    <p class="h4">{{msg_export}}</p>
+
+    <button (click)="exportToExcel(rows)"
+            class="btn btn-outline-primary">Exportar data</button>
+
+    <div class="container" *ngIf="msg_exported">
+      <p class="h4">{{msg_exported}}</p>
+      <h4>{{exportName}}</h4>
+    </div>
+  </div>
+
+</section>
 
 
 
 
-<div *ngIf="stats">
+
+
+
+<div *ngIf="show_callentry">
 
 </div>
 

@@ -26,7 +26,7 @@ export class ExcelService {
       bookType: "xlsx",
       type: "array"
     });
-    this.saveAsExcelFile(excelBuffer, excelFileName);
+    return this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
   public exportAsCsvFile(json: any[], excelFileName: string): void {
@@ -39,25 +39,32 @@ export class ExcelService {
       bookType: "csv",
       type: "array"
     });
-    this.saveAsCsvFile(excelBuffer, excelFileName);
+    return this.saveAsCsvFile(excelBuffer, excelFileName);
   }
 
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
 
+    const file = fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+
     FileSaver.saveAs(
       data,
-      fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+      file
     );
+    return file
   }
 
   private saveAsCsvFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
 
+    const file = fileName + "_export_" + new Date().getTime() + CSV_EXTENSION
+
     FileSaver.saveAs(
       data,
-      fileName + "_export_" + new Date().getTime() + CSV_EXTENSION
+      file
     );
+
+    return file
   }
 }

@@ -40,11 +40,19 @@ export class CallEntryReportComponent implements OnInit {
   alertMessage: AlertModel = new AlertModel();
 
   // Data
+  ping;
   title;
   exportName;
   stats;
   rows;
-  rows_original;
+  rows_count;
+
+  // msg
+  msg_connection;
+  msg_information;
+  msg_data;
+  msg_export;
+  msg_exported;
 
   constructor(
     private alertService: AlertService,
@@ -57,7 +65,6 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(_.isEmpty({})); // returns true
     this.userSelectionHistoric();
   }
   setReportTitles() {
@@ -84,8 +91,8 @@ export class CallEntryReportComponent implements OnInit {
       options: false,
       buttons: true,
     }
-    this.title = "Registro de entrada de llamadas";
-    this.exportName = "reporte-call-entry";
+    this.title = "Exportar llamadas entrantes";
+    this.exportName = "registros-call-entry";
 
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.selectorVisibleFields.groupBy = false;
@@ -102,7 +109,6 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   onOpenSelector(event) {
-    console.log('event back', event);
     this.userSelectionTemp = this.userSelection
     this.show_selector = true
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
@@ -110,7 +116,6 @@ export class CallEntryReportComponent implements OnInit {
 
   // Selector
   onCloseSelector(event) {
-    console.log('event back', event);
     this.show_selector = false
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
   }
@@ -122,13 +127,41 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   // Data
+
+  onPing() {
+    this.ping = null
+    this.msg_connection = 'Procesando...'
+    this.mainCallEntryService.ping().subscribe(
+      (res) => {
+        this.ping = res;
+        this.alertMessage = new AlertModel();
+        this.msg_connection = null;
+      },
+      error => {
+        console.error("Error", error);
+        this.show_stats = false;
+        this.alertService.error(error.status);
+        this.alertMessage.alertTitle = "Error del servidor";
+        this.alertMessage.alertText = error.statusText;
+        this.alertMessage.alertShow = true;
+        this.alertMessage.alertClass =
+          "alert alert-danger alert-dismissible fade show";
+      }
+    );
+  }
+
+
+
   getReportList(userSelection) {
+    this.rows = [];
+    this.show_callentry = false;
+    this.msg_data = 'Procesando...'
+
     if (userSelection) {
-      this.rows = [];
 
       this.mainCallEntryService.getReportList(userSelection).subscribe(
         (res) => {
-          this.show_callentry = false;
+
 
           let temp = res;
           this.show_callentry = true;
@@ -143,9 +176,14 @@ export class CallEntryReportComponent implements OnInit {
             res.CallEntryAmd
           );
 
-          console.log('this.rows', this.rows);
+
+          this.rows_count = this.rows.reduce((total, amount, index, array) => {
+            total += 1
+            return total
+          }, 0);
 
           this.alertMessage = new AlertModel();
+          this.msg_data = null
         },
         error => {
           console.error("Error", error);
@@ -163,6 +201,9 @@ export class CallEntryReportComponent implements OnInit {
 
 
   getResumeStats(userSelection) {
+    this.stats = null
+    this.show_stats = false;
+    this.msg_information = 'Procesando...'
     if (userSelection) {
       this.stats = {};
 
@@ -175,6 +216,7 @@ export class CallEntryReportComponent implements OnInit {
           console.log('this.stats', this.stats);
 
           this.alertMessage = new AlertModel();
+          this.msg_information = null
         },
         error => {
           console.error("Error", error);
@@ -191,8 +233,12 @@ export class CallEntryReportComponent implements OnInit {
   }
 
 
+
+
   // Export
   exportToExcel(data) {
+
+    this.msg_export = 'Procesando...'
 
     if (data) {
 
@@ -234,9 +280,14 @@ export class CallEntryReportComponent implements OnInit {
 
         };
       });
-      this.excelService.exportAsCsvFile(filterData, this.exportName);
+      let temp = this.excelService.exportAsCsvFile(filterData, this.exportName);
+      if (temp) {
+        this.msg_export = null
+        this.msg_exported = 'Data lista para guardar';
+      }
     }
     else {
+      this.msg_exported = 'No se pudo exportar la data'
       console.log('No data available');
 
     }

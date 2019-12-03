@@ -1,2 +1,24 @@
 @import "sections/reports/src/shared/styles/reports/standard-reports";
 @import "sections/reports/src/shared/styles/reports/detail-reports";
+
+.container{
+  margin: 10px;
+}
+
+.data-table{
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.text-right{
+  text-align: right;
+  padding-left: 10px;;
+}
+
+.four-panels{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}

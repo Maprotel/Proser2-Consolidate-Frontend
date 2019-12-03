@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-reports-call-entry-stats',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./call-entry-stats.component.scss']
 })
 export class CallEntryStatsComponent implements OnInit {
+
+  @Input() stats;
+  @Input() show_stats;
 
   constructor() { }
 
