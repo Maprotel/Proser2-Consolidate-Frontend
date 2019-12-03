@@ -447,9 +447,11 @@ model.fieldInfo('client').text
         <div class="button-group">
 
           <!-- BUTTONS -->
-          <button (click)="onSubmit()" class="btn btn-success">Aceptar</button>
-          <button (click)="onCancelSelector()" class="btn btn-warning">Cancelar</button>
-          <button (click)="onReset()"
+          <button type="button" (click)="onAcceptSelector()"
+                  class="btn btn-success">Aceptar</button>
+          <button type="button" (click)="onCancelSelector()"
+                  class="btn btn-warning">Cancelar</button>
+          <button type="button" (click)="onResetSelector()"
                   class="btn btn-secondary">Resetear</button>
           <hr>
           <!-- status -->
@@ -463,7 +465,7 @@ model.fieldInfo('client').text
                          placeholder="Estatus" [dropdownPosition]="'auto'"
                          [searchable]="false" [clearable]="false"
                          [multiple]="false" hideSelected="true"
-                         formControlName="status" (change)="onStatusChange()">
+                         formControlName="status" (change)="onChange()">
               </ng-select>
             </div>
 

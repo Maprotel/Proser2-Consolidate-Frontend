@@ -1,6 +1,8 @@
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
 import { AlertModel } from "shared/models/helpers/Alert";
+import { NgbModal, NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 import {
   AlertService,
@@ -23,26 +25,29 @@ import * as _ from 'lodash';
 })
 export class CallEntryReportComponent implements OnInit {
 
+  // Modal
+  activeModal: NgbActiveModal;
+
   // Selector
   userSelection: UserSelectionModel;
   selectorVisibleFields: UserSelectionModel;
   menuOptions: UserSelectionModel;
   userSelectionTemp: UserSelectionModel;
   selectorVisibleAreas;
+  selectorStatus;
 
   // Show
   show_selector: boolean = false;
   show_callentry: boolean = false;
   show_stats: boolean = false;
 
-
   // Alert
   alertMessage: AlertModel = new AlertModel();
 
   // Data
-  ping;
   title;
   exportName;
+  ping;
   stats;
   rows;
   rows_count;
@@ -55,6 +60,7 @@ export class CallEntryReportComponent implements OnInit {
   msg_exported;
 
   constructor(
+    private modalService: NgbModal,
     private alertService: AlertService,
     private envService: EnvService,
     private userSelectionService: UserSelectionService,
@@ -65,25 +71,15 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userSelectionHistoric();
-  }
-  setReportTitles() {
-    // this.userSelection = new UserSelectionModel("standard");
-    this.userSelection.title = this.title;
-    //
-    // //
-    this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
-
-    this.selectorVisibleFields.assignation = false;
-    this.selectorVisibleFields.auxiliar = false;
+    this.onResetValues();
   }
 
-  userSelectionHistoric() {
+  onResetValues() {
 
     this.userSelection = new UserSelectionModel('standard')
     this.selectorVisibleFields = new UserSelectionModel("visible");
-    this.selectorVisibleFields.start_time = false
-    this.selectorVisibleFields.end_time = false
+    this.selectorVisibleFields.start_time = false;
+    this.selectorVisibleFields.end_time = false;
     this.menuOptions = new UserSelectionModel("menuOptions");
     this.selectorVisibleAreas = {
       date: true,
@@ -91,6 +87,7 @@ export class CallEntryReportComponent implements OnInit {
       options: false,
       buttons: true,
     }
+    this.selectorStatus = false;
     this.title = "Exportar llamadas entrantes";
     this.exportName = "registros-call-entry";
 
@@ -102,6 +99,17 @@ export class CallEntryReportComponent implements OnInit {
     this.selectorVisibleFields.auxiliar = false;
     this.selectorVisibleFields.assignation = false;
 
+    this.msg_connection = null;
+    this.msg_information = null;
+    this.msg_data = null;
+    this.msg_export = null;
+    this.msg_exported = null;
+
+    this.ping = null;
+    this.stats = null;
+    this.rows = null;
+    this.rows_count = null;
+
     this.userSelection.title = this.title;
     this.userSelection.mode = { id: 1, name: "Histórico", value: "historic" };
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
@@ -109,25 +117,36 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   onOpenSelector(event) {
-    this.userSelectionTemp = this.userSelection
-    this.show_selector = true
-    this.userSelection = this.userSelectionService.readUserSelectionHistoric();
+    console.log('open');
+    openDetailModal('selector');
+
+    if (event) {
+      this.userSelectionTemp = this.userSelection
+      this.show_selector = true
+      this.userSelection = this.userSelectionService.readUserSelectionHistoric();
+    } else {
+      this.show_selector = false
+    }
   }
 
   // Selector
-  onCloseSelector(event) {
+  onAcceptSelector(event) {
     this.show_selector = false
+    this.selectorStatus = false
+    console.log('onAcceptSelector', this.selectorStatus);
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
+    this.onResetValues()
+    this.onCloseModal()
   }
 
   onCancelSelector() {
-    console.log('event back', event);
     this.show_selector = false;
+    this.selectorStatus = false;
     this.userSelection = this.userSelectionTemp;
+    this.onCloseModal()
   }
 
   // Data
-
   onPing() {
     this.ping = null
     this.msg_connection = 'Procesando...'
@@ -165,7 +184,6 @@ export class CallEntryReportComponent implements OnInit {
 
           let temp = res;
           this.show_callentry = true;
-          console.log('temp', temp);
 
           let array = []
 
@@ -213,7 +231,7 @@ export class CallEntryReportComponent implements OnInit {
 
           this.stats = res;
           this.show_stats = true;
-          console.log('this.stats', this.stats);
+
 
           this.alertMessage = new AlertModel();
           this.msg_information = null
@@ -280,17 +298,29 @@ export class CallEntryReportComponent implements OnInit {
 
         };
       });
+
       let temp = this.excelService.exportAsCsvFile(filterData, this.exportName);
-      if (temp) {
-        this.msg_export = null
-        this.msg_exported = 'Data lista para guardar';
-      }
+      this.msg_export = null
+      this.msg_exported = 'Data lista para guardar';
     }
     else {
       this.msg_exported = 'No se pudo exportar la data'
       console.log('No data available');
 
     }
+  }
+
+  // Modal
+
+  openDetailModal(content) {
+    this.activeModal = this.modalService.open(content, {
+      windowClass: "my-class",
+      keyboard: false
+    });
+  }
+
+  onCloseModal() {
+    this.activeModal.close();
   }
 
 }

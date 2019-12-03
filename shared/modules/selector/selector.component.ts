@@ -35,7 +35,7 @@ export class SelectorComponent implements OnInit, OnDestroy {
   @Output() closeModal: EventEmitter<any> = new EventEmitter();
   @Output() userSelectionBack: EventEmitter<any> = new EventEmitter();
 
-  @Output() closeSelector: EventEmitter<any> = new EventEmitter();
+  @Output() acceptSelector: EventEmitter<any> = new EventEmitter();
   @Output() cancelSelector: EventEmitter<any> = new EventEmitter();
 
   @Input() userSelection: UserSelectionModel;
@@ -92,57 +92,30 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.onChange()
   }
 
-  onReset() {
+  ngOnDestroy() {
+    // this.acceptSelector.emit("redraw");
+  }
+
+  // Selector
+  onResetSelector() {
     this.onFillForm(this.userSelection);
   }
 
-  onCloseModal() {
-    this.closeModal.emit("close");
-  }
-
-  onAccept() {
-    this.closeModal.emit("close");
+  onAcceptSelector() {
+    this.acceptSelector.emit("acceptSelector");
   }
 
   onCancelSelector() {
     this.cancelSelector.emit("cancelSelector");
   }
 
-  onAllDay() {
-    this.selectorForm.patchValue({
-      start_time_hour: {
-        hour: 0,
-        minute: 0,
-        second: 0,
-        value: "00:00:00"
-      }
-    });
-
-    this.selectorForm.patchValue({
-      end_time_hour: {
-        hour: 23,
-        minute: 59,
-        second: 59,
-        value: "23:59:59"
-      }
-    });
-
-    this.selectorForm.patchValue({
-      groupBy: groupList[0]
-    });
-
-    this.onChange();
+  onSubmit(currentSelection) {
+    // this.onAcceptSelector();
   }
 
-  ngOnDestroy() {
-    this.closeSelector.emit("redraw");
-  }
-
+  // Reset form
   onFillForm(currentSelection) {
     if (currentSelection) {
-      // this.start_time_text = objectTimeToTextTime(
-      //   currentSelection.start_time_hour
-      // );
 
       this.selectorForm = this.formBuilder.group({
         title: [currentSelection.title],
@@ -196,14 +169,32 @@ export class SelectorComponent implements OnInit, OnDestroy {
     return this.selectorForm.controls;
   }
 
-  onRechargeForm() {
-    // this.selectorForm.patchValue = this.incomingUserSelection;
+  onAllDay() {
+    this.selectorForm.patchValue({
+      start_time_hour: {
+        hour: 0,
+        minute: 0,
+        second: 0,
+        value: "00:00:00"
+      }
+    });
+
+    this.selectorForm.patchValue({
+      end_time_hour: {
+        hour: 23,
+        minute: 59,
+        second: 59,
+        value: "23:59:59"
+      }
+    });
+
+    this.selectorForm.patchValue({
+      groupBy: groupList[0]
+    });
+
+    this.onChange();
   }
 
-  onSubmit(currentSelection) {
-    console.log('closeSelector');
-    this.closeSelector.emit('closeSelector');
-  }
 
   onNewStartDate() {
     this.selectorForm.patchValue({
@@ -335,9 +326,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
     }
   }
 
-  onStatusChange() {
-    this.onChange();
-  }
 
   // Gets the menu lists from the server this.menuOptions
   getUserSelectionMenus() {
@@ -347,7 +335,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
       .subscribe(data => {
 
         this.menuOptions = data;
-        console.log('this. menuOptions', this.menuOptions);
 
         error => {
           this.onError(error);
@@ -363,10 +350,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
     this.alertMessage.alertShow = true;
     this.alertMessage.alertClass =
       "alert alert-danger alert-dismissible fade show";
-  }
-
-  closeModalMsg() {
-    this.closeSelector.emit("closeSelector");
   }
 
   getUserJsonSelector() {

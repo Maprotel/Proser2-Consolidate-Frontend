@@ -14,9 +14,7 @@ export class ExcelService {
   constructor() { }
 
 
-
-
-  public exportAsExcelFile(json: any[], excelFileName: string): void {
+  public exportAsExcelFile(json: any[], excelFileName: string) {
     const worksheet: WorkSheet = utils.json_to_sheet(json);
     const workbook: WorkBook = {
       Sheets: { data: worksheet },
@@ -29,7 +27,7 @@ export class ExcelService {
     return this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  public exportAsCsvFile(json: any[], excelFileName: string): void {
+  public exportAsCsvFile(json: any[], excelFileName: string) {
     const worksheet: WorkSheet = utils.json_to_sheet(json);
     const workbook: WorkBook = {
       Sheets: { data: worksheet },
@@ -43,7 +41,7 @@ export class ExcelService {
   }
 
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
+  private saveAsExcelFile(buffer: any, fileName: string) {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
 
     const file = fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
@@ -55,7 +53,7 @@ export class ExcelService {
     return file
   }
 
-  private saveAsCsvFile(buffer: any, fileName: string): void {
+  private saveAsCsvFile(buffer: any, fileName: string) {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
 
     const file = fileName + "_export_" + new Date().getTime() + CSV_EXTENSION

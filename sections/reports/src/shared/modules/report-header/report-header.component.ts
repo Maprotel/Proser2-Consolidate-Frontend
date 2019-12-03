@@ -23,9 +23,12 @@ export class ReportHeaderComponent implements OnInit {
 
   @Input() userSelection;
   @Input() selectorVisibleFields;
+  @Input() selectorStatus;
 
   activeModal: NgbActiveModal;
   env;
+
+
 
   constructor(
     private envService: EnvService,
@@ -52,8 +55,11 @@ export class ReportHeaderComponent implements OnInit {
   updateSelection(event, userSelectionBack) {
   }
 
+
   onOpenSelector(event) {
-    this.openSelector.emit('openSelector')
+    console.log('this.selectorStatus', this.selectorStatus, event);
+    this.selectorStatus = !this.selectorStatus;
+    this.openSelector.emit(this.selectorStatus);
   }
 
 }
