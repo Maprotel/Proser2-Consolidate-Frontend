@@ -64,6 +64,8 @@ export class CallEntryReportComponent implements OnInit {
   msg_audit;
   msg_audited;
 
+  // Error
+
   constructor(
     private modalService: NgbModal,
     private alertService: AlertService,
@@ -110,9 +112,15 @@ export class CallEntryReportComponent implements OnInit {
     this.msg_data = null;
     this.msg_export = null;
     this.msg_exported = null;
+    this.msg_audit = null;
+    this.msg_audited = null;
+
+    this.show_callentry = null;
+    this.show_stats = null;
 
     this.ping = null;
-    this.stats = null;
+    this.stats = null
+    // this.show_stats = false;
     this.rows = null;
     this.rows_count = null;
 
@@ -154,6 +162,7 @@ export class CallEntryReportComponent implements OnInit {
       },
       error => {
         console.error("Error", error);
+        this.msg_connection = ("Error: " + JSON.stringify(error))
         this.show_stats = false;
         this.alertService.error(error.status);
         this.alertMessage.alertTitle = "Error del servidor";
@@ -201,6 +210,7 @@ export class CallEntryReportComponent implements OnInit {
         },
         error => {
           console.error("Error", error);
+          this.msg_data = ("Error: " + JSON.stringify(error))
           this.show_callentry = false;
           this.alertService.error(error.status);
           this.alertMessage.alertTitle = "Error del servidor";
@@ -215,8 +225,8 @@ export class CallEntryReportComponent implements OnInit {
 
 
   getResumeStats(userSelection) {
-    this.stats = null
-    this.show_stats = false;
+    // this.onResetValues()
+
     this.msg_information = 'Procesando...'
     if (userSelection) {
       this.stats = {};
@@ -244,6 +254,7 @@ export class CallEntryReportComponent implements OnInit {
         },
         error => {
           console.error("Error", error);
+          this.msg_information = ("Error: " + JSON.stringify(error))
           this.show_stats = false;
           this.alertService.error(error.status);
           this.alertMessage.alertTitle = "Error del servidor";

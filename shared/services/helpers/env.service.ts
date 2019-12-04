@@ -14,10 +14,10 @@ export class EnvService {
   public home = "http://localhost:4200";
   public externalAssets = '/assets'
 
-  public auditLink = this.host + '/proser_reports/dist/audit/'
-  public homeLink = this.host + '/proser_reports/dist/home/'
-  public reportsLink = this.host + '/proser_reports/dist/reports/'
-  public systemLink = this.host + '/proser_reports/dist/system/'
+  public auditLink = this.host + '/proser/proser_reports/dist/audit/'
+  public homeLink = this.host + '/proser/proser_reports/dist/home/'
+  public reportsLink = this.host + '/proser/proser_reports/dist/reports/'
+  public systemLink = this.host + '/proser/proser_reports/dist/system/'
 
 
   // API url
@@ -48,7 +48,7 @@ export class EnvService {
   public external = "External file";
 
   // Show/Hide Register user option
-  public autoregister = true;
+  public autoregister = false;
 
 
   constructor() { }
