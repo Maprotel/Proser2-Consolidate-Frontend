@@ -92,7 +92,7 @@ export class CallEntryReportComponent implements OnInit {
       date: true,
       interval: false,
       options: false,
-      buttons: true,
+      buttons: false,
     }
     this.selectorStatus = false;
     this.title = "Exportar llamadas entrantes";
