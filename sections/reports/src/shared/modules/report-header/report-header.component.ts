@@ -57,9 +57,9 @@ export class ReportHeaderComponent implements OnInit {
 
 
   onOpenSelector(event) {
-    console.log('this.selectorStatus', this.selectorStatus, event);
-    this.selectorStatus = !this.selectorStatus;
-    this.openSelector.emit(this.selectorStatus);
+    // console.log('this.selectorStatus', this.selectorStatus, event);
+    // this.selectorStatus = !this.selectorStatus;
+    this.openSelector.emit('openSelector');
   }
 
 }

@@ -4,14 +4,17 @@
 
 <app-reports-report-header [userSelection]="userSelection"
                            [selectorStatus]="selectorStatus"
-                           (openSelector)="onOpenSelector($event)">
+                           (openSelector)="onOpenSelector(selector)">
 </app-reports-report-header>
 
 <main *ngIf="!show_selector">
 
   <section class="container">
-    <h2>Pasos a seguir para exportar</h2>
+    <h2><span><a class="btn btn-outline-primary"
+           (click)="onResetValues()">Iniciar</a></span> Pasos a seguir para
+      exportar</h2>
   </section>
+
 
   <section class="container four-panels">
 
@@ -97,12 +100,25 @@
 
       <p class="h4">{{msg_export}}</p>
 
-      <button (click)="exportToExcel(rows)"
+      <button (click)="exportDataToCsv(rows)"
               class="btn btn-outline-primary">Exportar data</button>
 
       <div class="container" *ngIf="msg_exported">
         <p class="h4">{{msg_exported}}</p>
-        <h4>{{exportName}}</h4>
+        <h4>{{exportDataName}}</h4>
+      </div>
+    </div>
+
+    <div *ngIf="show_callentry">
+
+      <p class="h4">{{msg_export}}</p>
+
+      <button (click)="exportAuditToCsv(stats_concat)"
+              class="btn btn-outline-primary">Exportar auditoría</button>
+
+      <div class="container" *ngIf="msg_audited">
+        <p class="h4">{{msg_audited}}</p>
+        <h4>{{exportAuditName}}</h4>
       </div>
     </div>
 
@@ -122,8 +138,6 @@
                 (cancelSelector)="onCancelSelector($event)">
   </app-selector>
 </div>
-
-<button type="button" (click)="openDetailModal(selector)">Selector</button>
 
 
 <!-- MODAL WINDOW FOR SELECTOR ---------------------------------------------------- -->

@@ -11,6 +11,7 @@
     "build-dashboard": "ng build --prod dashboard --base-href /proser_reports/dist/dashboard/;",
     "build-display": "ng build --prod display --base-href /proser_reports/dist/display/;",
     "build-home": "ng build --prod home --base-href /proser_reports/dist/home/",
+    "build-exports": "ng build --prod reports --base-href /exports/dist/exports/;",
     "build-reports": "ng build --prod reports --base-href /proser_reports/dist/reports/;",
     "build-sms": "ng build --prod sms --base-href /proser_reports/dist/sms/;",
     "build-system": "ng build --prod system --base-href /proser_reports/dist/system/;",

@@ -1,4 +1,4 @@
-// @import "sections/reports/src/shared/styles/reports/header-reports";
+// @import "sections/exports/src/shared/styles/exports/header-exports";
 // @import "shared/styles/styles";
 @import "shared/styles/modal/modal";
 
@@ -10,18 +10,21 @@
 }
 
 .header-left {
-  background: rgb(246, 246, 188);
+  background: rgb(255, 181, 117) 87%;
   text-align: left;
+  padding: 3px;
 }
 
 .header-center {
-  background: rgb(246, 246, 188);
+  background: rgb(255, 181, 117) 87%;
   text-align: center;
+    padding: 3px;
 }
 
 .header-right {
-  background: rgb(246, 246, 188);
+  background: rgb(255, 181, 117) 87%;
   text-align: right;
+  padding: 3px;
 }
 
 // TEXT OPTIONS

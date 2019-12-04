@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
@@ -46,9 +47,11 @@ export class CallEntryReportComponent implements OnInit {
 
   // Data
   title;
-  exportName;
+  exportDataName;
+  exportAuditName;
   ping;
   stats;
+  stats_concat;
   rows;
   rows_count;
 
@@ -58,6 +61,8 @@ export class CallEntryReportComponent implements OnInit {
   msg_data;
   msg_export;
   msg_exported;
+  msg_audit;
+  msg_audited;
 
   constructor(
     private modalService: NgbModal,
@@ -89,7 +94,8 @@ export class CallEntryReportComponent implements OnInit {
     }
     this.selectorStatus = false;
     this.title = "Exportar llamadas entrantes";
-    this.exportName = "registros-call-entry";
+    this.exportDataName = "registros-call-entry";
+    this.exportAuditName = "auditoria-call-entry";
 
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.selectorVisibleFields.groupBy = false;
@@ -117,23 +123,13 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   onOpenSelector(event) {
-    console.log('open');
-    openDetailModal('selector');
-
-    if (event) {
-      this.userSelectionTemp = this.userSelection
-      this.show_selector = true
-      this.userSelection = this.userSelectionService.readUserSelectionHistoric();
-    } else {
-      this.show_selector = false
-    }
+    this.openDetailModal(event);
   }
 
   // Selector
   onAcceptSelector(event) {
     this.show_selector = false
     this.selectorStatus = false
-    console.log('onAcceptSelector', this.selectorStatus);
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
     this.onResetValues()
     this.onCloseModal()
@@ -232,7 +228,17 @@ export class CallEntryReportComponent implements OnInit {
           this.stats = res;
           this.show_stats = true;
 
+          let array = []
 
+          this.stats_concat = _.concat(
+            array,
+            res.callCenterAmd,
+            res.callCenterAps,
+            res.callCenterEmergencia,
+            res.reportsAmd,
+            res.reportsAps,
+            res.reportsEmergencia,
+          );
           this.alertMessage = new AlertModel();
           this.msg_information = null
         },
@@ -254,7 +260,7 @@ export class CallEntryReportComponent implements OnInit {
 
 
   // Export
-  exportToExcel(data) {
+  exportDataToCsv(data) {
 
     this.msg_export = 'Procesando...'
 
@@ -262,51 +268,88 @@ export class CallEntryReportComponent implements OnInit {
 
       const filterData = data.map(x => {
         return {
-
-          agente_id: x.agente_id,
-          agente_nombre: x.agente_nombre,
-          año_dia_de_entrada_en_cola: x.año_dia_de_entrada_en_cola,
-          año_mes_de_entrada_en_cola: x.año_mes_de_entrada_en_cola,
-          año_sem_de_entrada_en_cola: x.año_sem_de_entrada_en_cola,
           call_center: x.call_center,
+          id: x.id,
+
+          estatus: x.estatus,
+
+          final_status: x.final_status,
+          tipo_llamada: x.tipo_llamada,
+
+          fecha_de_entrada_en_cola: x.fecha_de_entrada_en_cola,
+          hora_de_entrada_en_cola: x.hora_de_entrada_en_cola,
+
+          fecha_inicio_llamada: x.fecha_inicio_llamada,
+          hora_inicio_llamada: x.hora_inicio_llamada,
+          fecha_fin_llamada: x.fecha_fin_llamada,
+          hora_fin_llamada: x.hora_fin_llamada,
+
+
           cola_id: x.cola_id,
           cola_nombre: x.cola_nombre,
           cola_numero: x.cola_numero,
-          colgada_por: x.colgada_por,
-          contacto_telefono: x.contacto_telefono,
-          dia_sem_de_entrada_en_cola: x.dia_sem_de_entrada_en_cola,
-          duracion_llamada_seg: x.duracion_llamada_seg,
-          estatus: x.estatus,
-          extension_llamada_transferida: x.extension_llamada_transferida,
-          fecha_de_entrada_en_cola: x.fecha_de_entrada_en_cola,
-          fecha_fin_llamada: x.fecha_fin_llamada,
-          fecha_inicio_llamada: x.fecha_inicio_llamada,
-          final_status: x.final_status,
-          hh_de_entrada_en_cola: x.hh_de_entrada_en_cola,
-          hora_de_entrada_en_cola: x.hora_de_entrada_en_cola,
-          hora_fin_llamada: x.hora_fin_llamada,
-          hora_inicio_llamada: x.hora_inicio_llamada,
-          id: x.id,
-          mm_de_entrada_en_cola: x.mm_de_entrada_en_cola,
-          numero_llamada_id: x.numero_llamada_id,
-          ss_de_entrada_en_cola: x.ss_de_entrada_en_cola,
+          agente_id: x.agente_id,
+          agente_nombre: x.agente_nombre,
           supervisor_id: x.supervisor_id,
           supervisor_nombre: x.supervisor_nombre,
+          contacto_telefono: x.contacto_telefono,
+
+
+          duracion_llamada_seg: x.duracion_llamada_seg,
           tiempo_espera_seg: x.tiempo_espera_seg,
-          tipo_llamada: x.tipo_llamada,
+          numero_llamada_id: x.numero_llamada_id,
+          colgada_por: x.colgada_por,
+
+          dia_sem_de_entrada_en_cola: x.dia_sem_de_entrada_en_cola,
+          año_sem_de_entrada_en_cola: x.año_sem_de_entrada_en_cola,
+          año_mes_de_entrada_en_cola: x.año_mes_de_entrada_en_cola,
+          año_dia_de_entrada_en_cola: x.año_dia_de_entrada_en_cola,
+          hh_de_entrada_en_cola: x.hh_de_entrada_en_cola,
+          mm_de_entrada_en_cola: x.mm_de_entrada_en_cola,
+          ss_de_entrada_en_cola: x.ss_de_entrada_en_cola,
+
+          // extension_llamada_transferida: x.extension_llamada_transferida,
 
 
         };
       });
 
-      let temp = this.excelService.exportAsCsvFile(filterData, this.exportName);
+      let temp = this.excelService.exportAsCsvFile(filterData, this.exportDataName);
       this.msg_export = null
       this.msg_exported = 'Data lista para guardar';
     }
     else {
       this.msg_exported = 'No se pudo exportar la data'
-      console.log('No data available');
+    }
+  }
 
+
+  exportAuditToCsv(data) {
+
+    this.msg_audit = 'Procesando...'
+
+    if (data) {
+
+      const filterData = data.map(x => {
+        return {
+          origen: x.origin,
+          callentry_total_registros: x.callentry_count,
+          callentry_min_numero_id: x.callentry_min,
+          callentry_max_numero_id: x.callentry_max,
+          callentry_validacion:
+            (x.callentry_max && x.callentry_min) ? (x.callentry_max - x.callentry_min + 1
+            ) : null,
+          callentry_min_fecha_entrada_cola: x.callentry_min_calldate,
+          callentry_max_fecha_entrada_cola: x.callentry_max_calldate,
+        };
+      });
+
+      let temp = this.excelService.exportAsCsvFile(filterData, this.exportAuditName);
+      this.msg_audit = null
+      this.msg_audited = 'Data lista para guardar';
+    }
+    else {
+      this.msg_exported = 'No se pudo exportar la data'
     }
   }
 
@@ -320,6 +363,7 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   onCloseModal() {
+    this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.activeModal.close();
   }
 

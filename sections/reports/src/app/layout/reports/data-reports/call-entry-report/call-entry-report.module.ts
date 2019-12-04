@@ -20,19 +20,15 @@ import { SelectorModule } from "shared/modules/selector/selector.module";
 import { CallEntryReportComponent } from "./call-entry-report.component";
 import { CallEntryReportRoutingModule } from "./call-entry-report-routing.module";
 
-import { CallEntryReportListComponent } from "./call-entry-report-list/call-entry-report-list.component";
-
 import { ReportHeaderModule } from "sections/reports/src/shared/modules/report-header/report-header.module";
 import { ReportFinderModule } from "sections/reports/src/shared/modules/report-finder/report-finder.module";
 
 import { ExcelService } from 'sections/reports/src/shared/services';
-import { CallEntrySelectorComponent } from './call-entry-selector/call-entry-selector.component';
-import { CallEntrySubheaderComponent } from './call-entry-subheader/call-entry-subheader.component';
 import { CallEntryStatsComponent } from './call-entry-stats/call-entry-stats.component';
 
 
 @NgModule({
-  declarations: [CallEntryReportComponent, CallEntryReportListComponent, CallEntrySelectorComponent, CallEntrySubheaderComponent, CallEntryStatsComponent],
+  declarations: [CallEntryReportComponent, CallEntryStatsComponent],
   imports: [
     CommonModule,
 

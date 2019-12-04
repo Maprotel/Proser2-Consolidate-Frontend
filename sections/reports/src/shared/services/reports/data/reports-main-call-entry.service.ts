@@ -31,8 +31,6 @@ export class MainCallEntryService {
       this.env.loopbackApiUrl
       }/api/InvReports/mainCallEntryReport?access_token=${accessToken}`;
 
-
-    console.log('url_api', url_api)
     const res = this.http
       .post(url_api, userSelection, {
         headers: this.headers
@@ -51,7 +49,6 @@ export class MainCallEntryService {
       this.env.loopbackApiUrl
       }/api/InvReports/mainStatsReport?access_token=${accessToken}`;
 
-    console.log('url_api', url_api)
     const res = this.http
       .post(url_api, userSelection, {
         headers: this.headers
@@ -71,7 +68,7 @@ export class MainCallEntryService {
       this.env.loopbackApiUrl
       }/api/InvReports/ping?access_token=${accessToken}`;
 
-    console.log('url_api', url_api)
+
     const res = this.http
       .post(url_api, {
         headers: this.headers
