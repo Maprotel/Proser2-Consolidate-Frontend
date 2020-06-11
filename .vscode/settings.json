@@ -37,14 +37,14 @@
     "tsconfig.json": true,
     "tsconfig.spec.json": true,
     "tslint.json": true,
-    "projects/*/e2e": true,
-    "projects/*/*.json": true,
-    "projects/*/karma.conf.js": true,
-    "projects/*/browserslist": true,
-    "projects/*/src/main.ts": false,
-    "projects/*/src/polyfills.ts": true,
-    "projects/*/src/test.ts": true,
-    "projects/*/src/environments": false
+    "sections/*/e2e": true,
+    "sections/*/*.json": true,
+    "sections/*/karma.conf.js": true,
+    "sections/*/browserslist": true,
+    "sections/*/src/main.ts": false,
+    "sections/*/src/polyfills.ts": true,
+    "sections/*/src/test.ts": true,
+    "sections/*/src/environments": false
   },
   "files.watcherExclude": {
     ".babelrc": true,

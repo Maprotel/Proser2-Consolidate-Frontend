@@ -71,6 +71,9 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
   // groupList;
 
+  groupList;
+  list;
+
   constructor(
     private formBuilder: FormBuilder,
     private userSelectionService: UserSelectionService,
@@ -84,12 +87,11 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
     this.alertMessage = new AlertModel();
     this.model = new UserSelectionModel();
-
   }
 
   ngOnInit() {
     this.onFillForm(this.userSelection);
-    this.onChange()
+    this.onChange();
   }
 
   ngOnDestroy() {
@@ -116,7 +118,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
   // Reset form
   onFillForm(currentSelection) {
     if (currentSelection) {
-
       this.selectorForm = this.formBuilder.group({
         title: [currentSelection.title],
         entity_selection: [currentSelection.entity_selection],
@@ -194,7 +195,6 @@ export class SelectorComponent implements OnInit, OnDestroy {
 
     this.onChange();
   }
-
 
   onNewStartDate() {
     this.selectorForm.patchValue({
@@ -326,14 +326,12 @@ export class SelectorComponent implements OnInit, OnDestroy {
     }
   }
 
-
   // Gets the menu lists from the server this.menuOptions
   getUserSelectionMenus() {
     this.selection = this.userSelection; //this.userSelectionService.readUserSelection();
     this.userSelectionService
       .getUserSelectionMenus(this.selection)
       .subscribe(data => {
-
         this.menuOptions = data;
 
         error => {
@@ -355,6 +353,4 @@ export class SelectorComponent implements OnInit, OnDestroy {
   getUserJsonSelector() {
     this.jsonSelector = !this.jsonSelector;
   }
-
-
 }
