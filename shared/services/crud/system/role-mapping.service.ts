@@ -21,7 +21,7 @@ export class RoleMappingService {
     headers: this.headers
   };
 
-  constructor(private http: HttpClient, private env: EnvService) {}
+  constructor(private http: HttpClient, private env: EnvService) { }
 
   private handleError(error: any) {
     console.error(error);
@@ -86,6 +86,8 @@ export class RoleMappingService {
     const accessToken = localStorage.getItem("accessToken");
 
     const url_api = `${this.env.loopbackApiUrl}/api/Roles?access_token=${accessToken}`;
+    // console.log('url_api', url_api);
+
     return this.http
       .get<RoleMappingModel>(url_api, { headers: this.headers })
       .pipe(map(data => data));

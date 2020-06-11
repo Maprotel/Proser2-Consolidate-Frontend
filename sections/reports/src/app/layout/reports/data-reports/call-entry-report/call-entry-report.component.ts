@@ -26,6 +26,9 @@ import * as _ from 'lodash';
 })
 export class CallEntryReportComponent implements OnInit {
 
+  // Alert
+  alertMessage: AlertModel = new AlertModel();
+
   // Modal
   activeModal: NgbActiveModal;
 
@@ -42,8 +45,6 @@ export class CallEntryReportComponent implements OnInit {
   show_callentry: boolean = false;
   show_stats: boolean = false;
 
-  // Alert
-  alertMessage: AlertModel = new AlertModel();
 
   // Data
   title;
@@ -130,11 +131,11 @@ export class CallEntryReportComponent implements OnInit {
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
   }
 
+  // Selector
   onOpenSelector(event) {
-    this.openDetailModal(event);
+    this.onOpenModal(event);
   }
 
-  // Selector
   onAcceptSelector(event) {
     this.show_selector = false
     this.selectorStatus = false
@@ -366,7 +367,7 @@ export class CallEntryReportComponent implements OnInit {
 
   // Modal
 
-  openDetailModal(content) {
+  onOpenModal(content) {
     this.activeModal = this.modalService.open(content, {
       windowClass: "my-class",
       keyboard: false

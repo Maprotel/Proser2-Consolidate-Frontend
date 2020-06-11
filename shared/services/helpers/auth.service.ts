@@ -88,8 +88,10 @@ export class AuthService {
   // Check in database if user exists
   checkIfExists(user) {
     const accessToken = localStorage.getItem("accessToken");
-    const url_api = `${this.env.loopbackApiUrl}/api/Userbases/checkIfExists`;
 
+
+    const url_api = `${this.env.loopbackApiUrl}/api/Userbases/checkIfExists`;
+    console.log('url_api check', user, url_api);
     return this.http
       .post<any>(url_api, user, { headers: this.headers })
       .pipe(map(data => data));

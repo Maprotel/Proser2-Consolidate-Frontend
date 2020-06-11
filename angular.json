@@ -404,5 +404,8 @@
       }
     }
   },
-  "defaultProject": "proser"
+  "defaultProject": "proser",
+  "cli": {
+    "analytics": "9ee24a70-995a-4af4-9e4b-abab6f7b6526"
+  }
 }

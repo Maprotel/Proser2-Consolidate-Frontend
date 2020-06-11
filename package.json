@@ -6,9 +6,9 @@
     "start": "ng serve home",
     "start-dev": "ng serve home",
     "frontend": "ng serve home",
-    "build-home": "ng build --prod home --base-href /proser_reports/dist/home/",
-    "build-reports": "ng build --prod reports --base-href /proser_reports/dist/reports/;",
-    "build-system": "ng build --prod system --base-href /proser_reports/dist/system/;",
+    "build-home": "ng build --prod home --base-href /proser/proser_consolidate/dist/home/",
+    "build-reports": "ng build --prod reports --base-href /proser/proser_consolidate/dist/reports/;",
+    "build-system": "ng build --prod system --base-href /proser/proser_consolidate/dist/system/;",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -53,7 +53,7 @@
     "core-js": "^3.1.4",
     "file-saver": "^2.0.2",
     "goog-webfont-dl": "^1.0.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^8.0.2",
-    "@angular-devkit/build-angular": "^0.803.19",
+    "@angular-devkit/build-angular": "^0.901.8",
     "@angular-devkit/build-ng-packagr": "~0.803.19",
     "@angular/cli": "^8.3.19",
     "@angular/compiler-cli": "^8.2.14",
@@ -94,12 +94,12 @@
     "prettier": "^1.19.1",
     "pretty-quick": "^1.11.1",
     "protractor": "^5.4.2",
-    "rxjs-tslint": "^0.1.7",
+    "rxjs-tslint": "^0.1.8",
     "ts-node": "~7.0.0",
     "tsickle": "^0.35.0",
     "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5",
-    "webpack-bundle-analyzer": "^3.4.0"
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
