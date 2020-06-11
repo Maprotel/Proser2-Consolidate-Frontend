@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { tap, catchError, map } from "rxjs/operators";
 
-import { EnvService } from "shared/services/helpers/env.service";
-import { AuxHourModel } from "shared/models";
+import { EnvService } from "../../../services";
+import { AuxHourModel } from "../../../models";
 
 @Injectable({
   providedIn: "root"

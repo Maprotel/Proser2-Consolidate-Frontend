@@ -34,7 +34,7 @@
     "src/tsconfig.spec.json": true,
     "src/tslint.json": true,
     "tsconfig.app.json": true,
-    "tsconfig.json": true,
+    "tsconfig.json": false,
     "tsconfig.spec.json": true,
     "tslint.json": true,
     "sections/*/e2e": true,

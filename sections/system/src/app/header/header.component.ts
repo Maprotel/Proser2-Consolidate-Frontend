@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
-import { AuthService } from "shared/services/helpers/auth.service";
-import { AlertService } from "shared/services/helpers/alert.service";
-import { AlertModel } from "shared/models/helpers/Alert";
+import { AuthService, AlertService } from "../../../../../shared/services";
+import { AlertModel } from "../../../../../shared/models";
 
 @Component({
   selector: "app-header",
