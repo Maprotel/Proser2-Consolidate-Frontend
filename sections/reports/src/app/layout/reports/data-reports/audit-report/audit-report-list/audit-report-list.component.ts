@@ -59,6 +59,9 @@ export class AuditReportListComponent implements OnInit {
   model;
   exportName;
 
+  countAuditDate;
+  audit_date
+  sortFn
   constructor(
     private mainAuditService: MainAuditService,
     private alertService: AlertService,

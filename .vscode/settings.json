@@ -1,5 +1,7 @@
 {
   "files.exclude": {
+    "sections/*/*.*": true,
+    "sections/*/b*": true,
     ".babelrc": true,
     ".editorconfig": true,
     ".eslintrc.json": true,
@@ -23,28 +25,11 @@
     "error.tzt": true,
     "karma.conf.js": true,
     "node_modules": false,
-    "package-lock.json": true,
     "README.md": true,
-    "src/browserslist": false,
-    "src/favicon.ico": true,
-    "src/karma.conf.js": true,
-    "src/polyfills.ts": true,
-    "src/test.ts": true,
-    "src/tsconfig.app.json": true,
-    "src/tsconfig.spec.json": true,
-    "src/tslint.json": true,
     "tsconfig.app.json": true,
     "tsconfig.json": true,
     "tsconfig.spec.json": true,
-    "tslint.json": true,
-    "sections/*/e2e": true,
-    "sections/*/*.json": true,
-    "sections/*/karma.conf.js": true,
-    "sections/*/browserslist": true,
-    "sections/*/src/main.ts": false,
-    "sections/*/src/polyfills.ts": true,
-    "sections/*/src/test.ts": true,
-    "sections/*/src/environments": false
+    "tslint.json": true
   },
   "files.watcherExclude": {
     ".babelrc": true,
