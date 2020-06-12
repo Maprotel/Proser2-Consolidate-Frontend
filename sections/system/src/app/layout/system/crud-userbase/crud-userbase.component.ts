@@ -77,4 +77,6 @@ export class CrudUserbaseComponent implements OnInit {
 
     new ngxCsv(data_mapped, "My Report", options);
   }
+
+  onListAnswer($event) {}
 }

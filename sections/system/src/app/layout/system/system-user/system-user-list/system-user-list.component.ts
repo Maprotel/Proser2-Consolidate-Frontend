@@ -19,6 +19,9 @@ export class SystemUserListComponent implements OnInit {
   selection;
 
   model: UserbaseModel;
+
+  sortFn
+
   // INITIALIZATION
   constructor() {
     this.model = new UserbaseModel();

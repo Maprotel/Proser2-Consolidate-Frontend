@@ -1,5 +1,5 @@
-import { isNullOrUndefined } from 'util';
-import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { isNullOrUndefined } from "util";
+import { ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
 import { AlertModel } from "shared/models/helpers/Alert";
@@ -12,12 +12,12 @@ import {
 } from "shared/services";
 import { UserSelectionModel } from "shared/models";
 
-
 import {
-  ExcelService, MainCallEntryService
-} from 'sections/reports/src/shared/services';
+  ExcelService,
+  MainCallEntryService
+} from "sections/reports/src/shared/services";
 
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 @Component({
   selector: "app-reports-call-entry-report",
@@ -25,7 +25,6 @@ import * as _ from 'lodash';
   styleUrls: ["./call-entry-report.component.scss"]
 })
 export class CallEntryReportComponent implements OnInit {
-
   // Alert
   alertMessage: AlertModel = new AlertModel();
 
@@ -44,7 +43,6 @@ export class CallEntryReportComponent implements OnInit {
   show_selector: boolean = false;
   show_callentry: boolean = false;
   show_stats: boolean = false;
-
 
   // Data
   title;
@@ -73,18 +71,15 @@ export class CallEntryReportComponent implements OnInit {
     private envService: EnvService,
     private userSelectionService: UserSelectionService,
     private mainCallEntryService: MainCallEntryService,
-    private excelService: ExcelService,
-  ) {
-
-  }
+    private excelService: ExcelService
+  ) {}
 
   ngOnInit() {
     this.onResetValues();
   }
 
   onResetValues() {
-
-    this.userSelection = new UserSelectionModel('standard')
+    this.userSelection = new UserSelectionModel("standard");
     this.selectorVisibleFields = new UserSelectionModel("visible");
     this.selectorVisibleFields.start_time = false;
     this.selectorVisibleFields.end_time = false;
@@ -93,8 +88,8 @@ export class CallEntryReportComponent implements OnInit {
       date: true,
       interval: false,
       options: false,
-      buttons: false,
-    }
+      buttons: false
+    };
     this.selectorStatus = false;
     this.title = "Exportar llamadas entrantes";
     this.exportDataName = "registros-call-entry";
@@ -120,7 +115,7 @@ export class CallEntryReportComponent implements OnInit {
     this.show_stats = null;
 
     this.ping = null;
-    this.stats = null
+    this.stats = null;
     // this.show_stats = false;
     this.rows = null;
     this.rows_count = null;
@@ -137,33 +132,33 @@ export class CallEntryReportComponent implements OnInit {
   }
 
   onAcceptSelector(event) {
-    this.show_selector = false
-    this.selectorStatus = false
+    this.show_selector = false;
+    this.selectorStatus = false;
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
-    this.onResetValues()
-    this.onCloseModal()
+    this.onResetValues();
+    this.onCloseModal();
   }
 
-  onCancelSelector() {
+  onCancelSelector(event) {
     this.show_selector = false;
     this.selectorStatus = false;
     this.userSelection = this.userSelectionTemp;
-    this.onCloseModal()
+    this.onCloseModal();
   }
 
   // Data
   onPing() {
-    this.ping = null
-    this.msg_connection = 'Procesando...'
+    this.ping = null;
+    this.msg_connection = "Procesando...";
     this.mainCallEntryService.ping().subscribe(
-      (res) => {
+      res => {
         this.ping = res;
         this.alertMessage = new AlertModel();
         this.msg_connection = null;
       },
       error => {
         console.error("Error", error);
-        this.msg_connection = ("Error: " + JSON.stringify(error))
+        this.msg_connection = "Error: " + JSON.stringify(error);
         this.show_stats = false;
         this.alertService.error(error.status);
         this.alertMessage.alertTitle = "Error del servidor";
@@ -175,23 +170,18 @@ export class CallEntryReportComponent implements OnInit {
     );
   }
 
-
-
   getReportList(userSelection) {
     this.rows = [];
     this.show_callentry = false;
-    this.msg_data = 'Procesando...'
+    this.msg_data = "Procesando...";
 
     if (userSelection) {
-
       this.mainCallEntryService.getReportList(userSelection).subscribe(
-        (res) => {
-
-
+        res => {
           let temp = res;
           this.show_callentry = true;
 
-          let array = []
+          let array = [];
 
           this.rows = _.concat(
             array,
@@ -200,18 +190,17 @@ export class CallEntryReportComponent implements OnInit {
             res.CallEntryAmd
           );
 
-
           this.rows_count = this.rows.reduce((total, amount, index, array) => {
-            total += 1
-            return total
+            total += 1;
+            return total;
           }, 0);
 
           this.alertMessage = new AlertModel();
-          this.msg_data = null
+          this.msg_data = null;
         },
         error => {
           console.error("Error", error);
-          this.msg_data = ("Error: " + JSON.stringify(error))
+          this.msg_data = "Error: " + JSON.stringify(error);
           this.show_callentry = false;
           this.alertService.error(error.status);
           this.alertMessage.alertTitle = "Error del servidor";
@@ -224,22 +213,21 @@ export class CallEntryReportComponent implements OnInit {
     }
   }
 
-
   getResumeStats(userSelection) {
     // this.onResetValues()
 
-    this.msg_information = 'Procesando...'
+    this.msg_information = "Procesando...";
     if (userSelection) {
       this.stats = {};
 
       this.mainCallEntryService.getResumeStats(userSelection).subscribe(
-        (res) => {
+        res => {
           this.show_stats = false;
 
           this.stats = res;
           this.show_stats = true;
 
-          let array = []
+          let array = [];
 
           this.stats_concat = _.concat(
             array,
@@ -248,14 +236,14 @@ export class CallEntryReportComponent implements OnInit {
             res.callCenterEmergencia,
             res.reportsAmd,
             res.reportsAps,
-            res.reportsEmergencia,
+            res.reportsEmergencia
           );
           this.alertMessage = new AlertModel();
-          this.msg_information = null
+          this.msg_information = null;
         },
         error => {
           console.error("Error", error);
-          this.msg_information = ("Error: " + JSON.stringify(error))
+          this.msg_information = "Error: " + JSON.stringify(error);
           this.show_stats = false;
           this.alertService.error(error.status);
           this.alertMessage.alertTitle = "Error del servidor";
@@ -268,16 +256,11 @@ export class CallEntryReportComponent implements OnInit {
     }
   }
 
-
-
-
   // Export
   exportDataToCsv(data) {
-
-    this.msg_export = 'Procesando...'
+    this.msg_export = "Procesando...";
 
     if (data) {
-
       const filterData = data.map(x => {
         return {
           call_center: x.call_center,
@@ -296,7 +279,6 @@ export class CallEntryReportComponent implements OnInit {
           fecha_fin_llamada: x.fecha_fin_llamada,
           hora_fin_llamada: x.hora_fin_llamada,
 
-
           cola_id: x.cola_id,
           cola_nombre: x.cola_nombre,
           cola_numero: x.cola_numero,
@@ -305,7 +287,6 @@ export class CallEntryReportComponent implements OnInit {
           supervisor_id: x.supervisor_id,
           supervisor_nombre: x.supervisor_nombre,
           contacto_telefono: x.contacto_telefono,
-
 
           duracion_llamada_seg: x.duracion_llamada_seg,
           tiempo_espera_seg: x.tiempo_espera_seg,
@@ -318,30 +299,27 @@ export class CallEntryReportComponent implements OnInit {
           año_dia_de_entrada_en_cola: x.año_dia_de_entrada_en_cola,
           hh_de_entrada_en_cola: x.hh_de_entrada_en_cola,
           mm_de_entrada_en_cola: x.mm_de_entrada_en_cola,
-          ss_de_entrada_en_cola: x.ss_de_entrada_en_cola,
+          ss_de_entrada_en_cola: x.ss_de_entrada_en_cola
 
           // extension_llamada_transferida: x.extension_llamada_transferida,
-
-
         };
       });
 
-      let temp = this.excelService.exportAsCsvFile(filterData, this.exportDataName);
-      this.msg_export = null
-      this.msg_exported = 'Data lista para guardar';
-    }
-    else {
-      this.msg_exported = 'No se pudo exportar la data'
+      let temp = this.excelService.exportAsCsvFile(
+        filterData,
+        this.exportDataName
+      );
+      this.msg_export = null;
+      this.msg_exported = "Data lista para guardar";
+    } else {
+      this.msg_exported = "No se pudo exportar la data";
     }
   }
 
-
   exportAuditToCsv(data) {
-
-    this.msg_audit = 'Procesando...'
+    this.msg_audit = "Procesando...";
 
     if (data) {
-
       const filterData = data.map(x => {
         return {
           origen: x.origin,
@@ -349,19 +327,22 @@ export class CallEntryReportComponent implements OnInit {
           callentry_min_numero_id: x.callentry_min,
           callentry_max_numero_id: x.callentry_max,
           callentry_validacion:
-            (x.callentry_max && x.callentry_min) ? (x.callentry_max - x.callentry_min + 1
-            ) : null,
+            x.callentry_max && x.callentry_min
+              ? x.callentry_max - x.callentry_min + 1
+              : null,
           callentry_min_fecha_entrada_cola: x.callentry_min_calldate,
-          callentry_max_fecha_entrada_cola: x.callentry_max_calldate,
+          callentry_max_fecha_entrada_cola: x.callentry_max_calldate
         };
       });
 
-      let temp = this.excelService.exportAsCsvFile(filterData, this.exportAuditName);
-      this.msg_audit = null
-      this.msg_audited = 'Data lista para guardar';
-    }
-    else {
-      this.msg_exported = 'No se pudo exportar la data'
+      let temp = this.excelService.exportAsCsvFile(
+        filterData,
+        this.exportAuditName
+      );
+      this.msg_audit = null;
+      this.msg_audited = "Data lista para guardar";
+    } else {
+      this.msg_exported = "No se pudo exportar la data";
     }
   }
 
@@ -378,5 +359,4 @@ export class CallEntryReportComponent implements OnInit {
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.activeModal.close();
   }
-
 }

@@ -18,12 +18,9 @@ import { UserSelectionService } from "shared/services/crud/system/user-selection
 import { UserSelectionModel } from "shared/models";
 import { MainCdrReportModel } from "sections/reports/src/shared/models/reports/data/MainCdrReport.model";
 
-import {
-  objectDateToTextDate,
-  textDateToObjectDate
-} from "shared/functions";
+import { objectDateToTextDate, textDateToObjectDate } from "shared/functions";
 
-import { ExcelService } from 'sections/reports/src/shared/services';
+import { ExcelService } from "sections/reports/src/shared/services";
 
 @Component({
   selector: "app-reports-cdr-report-list",
@@ -59,6 +56,10 @@ export class CdrReportListComponent implements OnInit {
   model: MainCdrReportModel;
   exportName;
 
+  countCdrDate;
+  cdr_calldate;
+  sortFn;
+  cdr_id
   constructor(
     private mainCdrService: MainCdrService,
     private alertService: AlertService,
@@ -90,10 +91,7 @@ export class CdrReportListComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.userSelectionService.writeUserSelectionHistoric(
-      this.userSelection,
-
-    );
+    this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
   }
 
   getReportList(userSelection) {
@@ -168,7 +166,7 @@ export class CdrReportListComponent implements OnInit {
     return output;
   }
 
-  onChange() { }
+  onChange() {}
 
   openModal(content) {
     this.activeModal = this.modalService.open(content, {
