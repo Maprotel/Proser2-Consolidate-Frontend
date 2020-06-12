@@ -28,6 +28,8 @@ export class CrudUserbaseListComponent implements OnInit {
 
   @Input() exportData;
 
+  sortFn
+
   constructor(
     private userbaseService: UserbaseService,
     private roleMappingService: RoleMappingService,
