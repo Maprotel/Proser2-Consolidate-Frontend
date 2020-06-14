@@ -1,4 +1,8 @@
 // DATATABLE
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
 @import "./datatable/_material";
 @import "./datatable/dark";
-@import "./datatable/icons";
+
+// NG SELECT
+@import "~@ng-select/ng-select/themes/default.theme.css";

@@ -3,34 +3,34 @@
 }
 
 .agent-box {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
-.submenu{
-  display:grid;
+.submenu {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
 
-  &-btn{
+  &-btn {
     font-size: 0.8rem;
     margin: 10px;
     padding: 2px 10px 2px 10px;
   }
 
-  &-buttons{
-    display:grid;
+  &-buttons {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
   }
 
-  &-input{
+  &-input {
     font-size: 0.8rem;
     margin-top: 10px;
     padding: 2px 10px 2px 10px;
     margin-right: 10px;
   }
 
-  &-selector{
+  &-selector {
     font-size: 0.8rem;
     margin-top: 10px;
     padding: 2px 10px 2px 10px;
@@ -39,30 +39,15 @@
     border: 1px solid black;
   }
 
-  &-right-menu{
-    display:grid;
+  &-right-menu {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
   }
-
-
-
 }
 
 .myCustomModalClass .modal-dialog {
   width: 1000px;
-}
-
-.ng-select.custom {
-  border:0px;
-  min-height: 0px;
-  border-radius: 5;
-}
-
-.ng-select.custom ::ng-deep .ng-select-container {
-  min-height: 0px;
-  border-radius: 0;
-  z-index: 1;
 }
 
 .pointer {

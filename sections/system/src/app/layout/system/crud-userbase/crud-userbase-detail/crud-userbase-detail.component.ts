@@ -31,13 +31,60 @@ export class CrudUserbaseDetailComponent implements OnInit {
   profile_json;
   roleItem;
 
+  profileList;
+
   constructor(
     private formBuilder: FormBuilder,
     private userbaseService: UserbaseService,
     private roleMappingService: RoleMappingService,
     private alertService: AlertService,
     private authService: AuthService
-  ) { }
+  ) {
+    // this.profileList = [
+    //   {
+    //     id: 1,
+    //     name: "admin",
+    //     description: "Administrator",
+    //     created: "2019-08-08T20:43:17.000Z",
+    //     modified: "2019-08-08T20:43:17.000Z"
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "system",
+    //     description: "Sistema",
+    //     created: "2019-09-16T12:00:21.000Z",
+    //     modified: "2019-09-16T12:00:21.000Z"
+    //   },
+    //   {
+    //     id: 3,
+    //     name: "config",
+    //     description: "Configuracion",
+    //     created: "2019-09-16T12:00:21.000Z",
+    //     modified: "2019-09-16T12:00:21.000Z"
+    //   },
+    //   {
+    //     id: 4,
+    //     name: "user",
+    //     description: "Usuario",
+    //     created: "2019-09-16T12:00:21.000Z",
+    //     modified: "2019-09-16T12:00:21.000Z"
+    //   },
+    //   {
+    //     id: 5,
+    //     name: "develop",
+    //     description: "Developer",
+    //     created: "2019-09-20T13:36:55.000Z",
+    //     modified: "2019-09-20T13:36:55.000Z"
+    //   },
+    //   {
+    //     id: 7,
+    //     name: "guest",
+    //     description: "Invitado",
+    //     created: "2019-10-27T12:33:17.000Z",
+    //     modified: "2019-10-27T12:33:17.000Z"
+    //   }
+    // ];
+  }
 
   ngOnInit() {
     this.onFillForm();
@@ -112,7 +159,7 @@ export class CrudUserbaseDetailComponent implements OnInit {
     this.crudRecord.action === "new" ? this.onCheckIfExists() : "";
   }
 
-  onButton() { }
+  onButton() {}
 
   /***************************************** */
 
@@ -174,7 +221,6 @@ export class CrudUserbaseDetailComponent implements OnInit {
 
   // EDIT RECORD
   editRecord() {
-
     // put form values into variable
     let query = this.registerForm.value;
     query.profile_json = JSON.stringify(this.registerForm.value.profile_json);

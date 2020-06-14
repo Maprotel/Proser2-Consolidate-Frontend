@@ -24,8 +24,10 @@
             <div *ngIf="true">
               <p class="register-detail">{{ crudRecord.currentRecord.id }}</p>
             </div>
-            <input *ngIf="false" type="text" formControlName="id" (change)="onRecordChange()"
-              class="form-control register-input disabled" [ngClass]="{ 'is-invalid': f.id.errors }" />
+            <input *ngIf="false" type="text" formControlName="id"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.id.errors }" />
 
             <div *ngIf="f.id.dirty && f.id.errors" class="register-error">
               <div *ngIf="f.id.errors.required">
@@ -48,11 +50,14 @@
                 {{ crudRecord.currentRecord.firstname }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="firstname" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.firstname.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="firstname"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.firstname.errors }" />
 
-            <div *ngIf="f.firstname.dirty && f.firstname.errors" class="register-error">
+            <div *ngIf="f.firstname.dirty && f.firstname.errors"
+                 class="register-error">
               <div *ngIf="f.firstname.errors.required">
                 Este dato es obligatorio
               </div>
@@ -70,11 +75,14 @@
               <p class="register-detail">{{ crudRecord.currentRecord.lastname }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="lastname" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.lastname.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="lastname"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.lastname.errors }" />
 
-            <div *ngIf="f.lastname.dirty && f.lastname.errors" class="register-error">
+            <div *ngIf="f.lastname.dirty && f.lastname.errors"
+                 class="register-error">
               <div *ngIf="f.lastname.errors.required">
                 Este dato es obligatorio
               </div>
@@ -93,10 +101,13 @@
               <p class="register-detail">{{ crudRecord.currentRecord.username }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="username" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.username.errors }" />
-            <div *ngIf="f.username.dirty && f.username.errors" class="register-error">
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="username"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.username.errors }" />
+            <div *ngIf="f.username.dirty && f.username.errors"
+                 class="register-error">
 
               <div *ngIf="f.username.errors.required">Usuario es
                 obligatorios</div>
@@ -118,11 +129,14 @@
               <p class="register-detail">{{ crudRecord.currentRecord.password }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="password" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.password.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="password"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.password.errors }" />
 
-            <div *ngIf="f.password.dirty && f.password.errors" class="register-error">
+            <div *ngIf="f.password.dirty && f.password.errors"
+                 class="register-error">
               <div *ngIf="f.password.errors.required">La clave es
                 obligatoria</div>
               <div *ngIf="f.password.errors.minlength">La clave debe
@@ -142,11 +156,14 @@
                 {{ crudRecord.currentRecord.confirmPassword }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="confirmPassword" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.confirmPassword.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="confirmPassword"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.confirmPassword.errors }" />
 
-            <div *ngIf="f.confirmPassword.dirty && f.confirmPassword.errors" class="register-error">
+            <div *ngIf="f.confirmPassword.dirty && f.confirmPassword.errors"
+                 class="register-error">
               <div *ngIf="f.confirmPassword.errors.required">La
                 confirmación de la clave es obligatoria</div>
               <div *ngIf="f.confirmPassword.errors.mustMatch">Las claves
@@ -167,9 +184,11 @@
               <p class="register-detail">{{ crudRecord.currentRecord.email }}
               </p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="email" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.email.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="email"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.email.errors }" />
 
             <div *ngIf="f.email.dirty && f.email.errors" class="register-error">
 
@@ -219,11 +238,14 @@
               <p class="register-detail">
                 {{ crudRecord.currentRecord.user_legal_id }}</p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="user_legal_id" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.user_legal_id.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="user_legal_id"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.user_legal_id.errors }" />
 
-            <div *ngIf="f.user_legal_id.dirty && f.user_legal_id.errors" class="register-error">
+            <div *ngIf="f.user_legal_id.dirty && f.user_legal_id.errors"
+                 class="register-error">
               <div *ngIf="f.user_legal_id.errors.required">Usuario es
                 obligatorios</div>
               <div *ngIf="f.user_legal_id.errors.pattern">La cedula debe
@@ -245,11 +267,14 @@
               <p class="register-detail">
                 {{ crudRecord.currentRecord.user_internal_id }}</p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="user_internal_id" (change)="onRecordChange()"
-              class="form-control register-input disabled" [ngClass]="{ 'is-invalid': f.user_internal_id.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="user_internal_id"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.user_internal_id.errors }" />
 
-            <div *ngIf="f.user_internal_id.dirty && f.user_internal_id.errors" class="register-error">
+            <div *ngIf="f.user_internal_id.dirty && f.user_internal_id.errors"
+                 class="register-error">
               <div *ngIf="f.user_internal_id.errors.required">
                 Este dato es obligatorio
               </div>
@@ -270,11 +295,14 @@
               <p class="register-detail">
                 {{ crudRecord.currentRecord.user_photo_path }}</p>
             </div>
-            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'" type="text"
-              formControlName="user_photo_path" (change)="onRecordChange()" class="form-control register-input disabled"
-              [ngClass]="{ 'is-invalid': f.user_photo_path.errors }" />
+            <input *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'"
+                   type="text" formControlName="user_photo_path"
+                   (change)="onRecordChange()"
+                   class="form-control register-input disabled"
+                   [ngClass]="{ 'is-invalid': f.user_photo_path.errors }" />
 
-            <div *ngIf="f.user_photo_path.dirty && f.user_photo_path.errors" class="register-error">
+            <div *ngIf="f.user_photo_path.dirty && f.user_photo_path.errors"
+                 class="register-error">
               <div *ngIf="f.user_photo_path.errors.required">
                 Este dato es obligatorio
               </div>
@@ -282,13 +310,11 @@
           </div>
 
 
+          <!-- <p>{{crudRecord.action}}</p> -->
 
           <!-- profile_json --------------------------------------------- -->
           <div class="form-group" profile_json="profile_json">
             <label class="register-label">
-              <!-- {{
-                crudRecord.model.fieldInfo('profile_json').text
-              }} -->
               Perfil
             </label>
 
@@ -299,21 +325,23 @@
             </div>
 
             <div class="form-control register-input"
-              *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'">
-              <ng-select [items]="crudRecord.profileList" bindLabel="name" placeholder="Perfil"
-                [dropdownPosition]="'auto'" [searchable]="false" [clearable]="false" [multiple]="false"
-                hideSelected="true" formControlName="profile_json" (change)="onRecordChange()"
-                (change)="onRecordChange()">
+                 *ngIf="crudRecord.action === 'edit' || crudRecord.action === 'new'">
+              <ng-select [items]="crudRecord.profileList" bindLabel="name"
+                         placeholder="Perfil" [dropdownPosition]="'auto'"
+                         [searchable]="false" [clearable]="false"
+                         [multiple]="false" hideSelected="true"
+                         formControlName="profile_json"
+                         (change)="onRecordChange()">
               </ng-select>
             </div>
 
-            <div *ngIf="f.profile_json.dirty && f.profile_json.errors" class="register-error">
+            <div *ngIf="f.profile_json.dirty && f.profile_json.errors"
+                 class="register-error">
               <div *ngIf="f.profile_json.errors.required">
                 Este dato es obligatorio
               </div>
             </div>
           </div>
-
 
 
           <!-------------------------- FIELD SECTION END --------------------------->
@@ -329,43 +357,47 @@
 
 
             <div>
-              <button type="button" class="btn btn-warning  register-button" (click)="onCancel()"
-                *ngIf="crudRecord.buttonCancel.value">
+              <button type="button" class="btn btn-warning  register-button"
+                      (click)="onCancel()"
+                      *ngIf="crudRecord.buttonCancel.value">
                 Cancelar
               </button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-secondary  register-button" (click)="onReset()"
-                *ngIf="crudRecord.buttonReset.value">
+              <button type="button" class="btn btn-secondary  register-button"
+                      (click)="onReset()" *ngIf="crudRecord.buttonReset.value">
                 Reiniciar
               </button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-danger  register-button" (click)="onDelete()"
-                *ngIf="crudRecord.action === 'edit'">
+              <button type="button" class="btn btn-danger  register-button"
+                      (click)="onDelete()" *ngIf="crudRecord.action === 'edit'">
                 Eliminar
               </button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-danger  register-button" (click)="onDeactivate()"
-                *ngIf="crudRecord.buttonDeactivate.value">
+              <button type="button" class="btn btn-danger  register-button"
+                      (click)="onDeactivate()"
+                      *ngIf="crudRecord.buttonDeactivate.value">
                 Desactivar
               </button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-primary  register-button" (click)="
+              <button type="button" class="btn btn-primary  register-button"
+                      (click)="
               onReactivate()" *ngIf="crudRecord.buttonReactivate.value">
                 Reactivar
               </button>
             </div>
 
             <div>
-              <button type="button" class="btn btn-success  register-button" (click)="onSubmit()"
-                *ngIf="(registerForm.status === 'VALID' && !registerForm.pristine  && crudRecord.action==='new') || (!registerForm.pristine && crudRecord.action==='edit')">
+              <button type="button" class="btn btn-success  register-button"
+                      (click)="onSubmit()"
+                      *ngIf="(registerForm.status === 'VALID' && !registerForm.pristine  && crudRecord.action==='new') || (!registerForm.pristine && crudRecord.action==='edit')">
                 Guardar
               </button>
             </div>
