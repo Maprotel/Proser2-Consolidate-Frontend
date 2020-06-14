@@ -63,7 +63,7 @@ export class SystemUserDetailComponent implements OnInit {
     this.show_data = true;
     this.model = new UserbaseModel();
 
-    // [
+    // this.typeList = [
     //   { id: 1, name: "admin", value: 10 },
     //   { id: 2, name: "system", value: 7 },
     //   { id: 3, name: "config", value: 5 },
