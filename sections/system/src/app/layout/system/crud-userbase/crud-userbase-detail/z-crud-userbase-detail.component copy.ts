@@ -40,6 +40,7 @@ export class CrudUserbaseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("HOLA");
     this.onFillForm();
     // this.crudRecord.currentRecord.roleMapping = this.getExistingRoleMapping(
     //   this.crudRecord.currentRecord
