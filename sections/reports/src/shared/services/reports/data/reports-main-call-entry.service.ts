@@ -80,4 +80,33 @@ export class MainCallEntryService {
     return res;
   }
 
+  downloadFile(route: string, filename: string = null) {
+    const baseUrl = `${this.env.loopbackApiUrl}/files/`;
+    const accessToken = localStorage.getItem("accessToken");
+    const headers = new HttpHeaders().set(
+      "authorization",
+      "Bearer " + accessToken
+    );
+    return this.http.get(baseUrl + route, {
+      headers,
+      responseType: "blob" as "json"
+    });
+  }
+  
+  cleanOldFiles(userSelection: UserSelectionModel): Observable<any> {
+    const accessToken = localStorage.getItem("accessToken");
+    const url_api = `${
+      this.env.loopbackApiUrl
+      }/api/InvReports/cleanOldFilesFunction?access_token=${accessToken}`;
+    const res = this.http
+      .get(url_api, {
+        headers: this.headers
+      })
+      .pipe(
+        map(data => data),
+        catchError(this.handleError)
+      );
+    return res;
+  }
+
 }

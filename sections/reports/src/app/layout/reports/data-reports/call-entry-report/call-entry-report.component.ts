@@ -43,6 +43,7 @@ export class CallEntryReportComponent implements OnInit {
   show_selector: boolean = false;
   show_callentry: boolean = false;
   show_stats: boolean = false;
+  show_start_process: boolean = false;
 
   // Data
   title;
@@ -53,6 +54,7 @@ export class CallEntryReportComponent implements OnInit {
   stats_concat;
   rows;
   rows_count;
+  filename;
 
   // msg
   msg_connection;
@@ -62,6 +64,7 @@ export class CallEntryReportComponent implements OnInit {
   msg_exported;
   msg_audit;
   msg_audited;
+
 
   // Error
 
@@ -124,6 +127,16 @@ export class CallEntryReportComponent implements OnInit {
     this.userSelection.mode = { id: 1, name: "Histórico", value: "historic" };
     this.userSelectionService.writeUserSelectionHistoric(this.userSelection);
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
+    
+  }
+
+  onBegin() {
+    this.onResetValues();
+    this.mainCallEntryService.cleanOldFiles(this.userSelection).subscribe(
+      data => {
+        this.show_start_process = true;
+      }
+    );
   }
 
   // Selector
@@ -179,6 +192,7 @@ export class CallEntryReportComponent implements OnInit {
       this.mainCallEntryService.getReportList(userSelection).subscribe(
         res => {
           let temp = res;
+          this.filename = res[0];
           this.show_callentry = true;
 
           let array = [];
@@ -358,5 +372,45 @@ export class CallEntryReportComponent implements OnInit {
   onCloseModal() {
     this.userSelection = this.userSelectionService.readUserSelectionHistoric();
     this.activeModal.close();
+  }
+
+  downloadFile() {
+    // const recordSelection = JSON.parse(localStorage.getItem("selected_row"));
+    // const url = recordSelection.record;
+    const route = this.filename;
+    // const fileExtension = route.substring(route.lastIndexOf(".") + 1);
+
+    // const src = recordSelection.call_source;
+    // const dst = recordSelection.call_destiny;
+
+    let fileName = this.filename;
+
+    // if (ext) {
+    //   fileName = fileName + "." + ext;
+    // }
+
+    this.mainCallEntryService.downloadFile(route, fileName).subscribe(
+      (response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement("a");
+        downloadLink.href = window.URL.createObjectURL(
+          new Blob(binaryData, { type: dataType })
+        );
+        if (fileName) downloadLink.setAttribute("download", fileName);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      },
+      error => {
+        console.error("Error", error);
+        this.alertService.error(error.status);
+        this.alertMessage.alertTitle = "Error del servidor";
+        this.alertMessage.alertText = error.statusText;
+        this.alertMessage.alertShow = true;
+        this.alertMessage.alertClass =
+          "alert alert-danger alert-dismissible fade show";
+      }
+    );
   }
 }

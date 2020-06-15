@@ -11,12 +11,12 @@
 
   <section class="container">
     <h2><span><a class="btn btn-outline-primary"
-           (click)="onResetValues()">Iniciar</a></span> Pasos a seguir para
+           (click)="onBegin()">Iniciar</a></span> Pasos a seguir para
       exportar</h2>
   </section>
 
 
-  <section class="container four-panels">
+  <section class="container four-panels" *ngIf="show_start_process">
 
     <div>
       <button (click)="onPing()" class="btn btn-outline-primary">Validar
@@ -88,28 +88,29 @@
           </tr>
           <tr>
             <td class="h4">Total</td>
-            <td class="h4 text-right">{{rows_count}}</td>
+            <td class="h4 text-right">{{ stats.reportsEmergencia[0].callentry_count + stats.reportsAps[0].callentry_count + stats.reportsAmd[0].callentry_count}}</td>
           </tr>
         </table>
       </div>
 
-
-    </div>
-
-    <div *ngIf="show_callentry">
-
-      <p class="h4">{{msg_export}}</p>
-
-      <button (click)="exportDataToCsv(rows)"
-              class="btn btn-outline-primary">Exportar data</button>
-
-      <div class="container" *ngIf="msg_exported">
-        <p class="h4">{{msg_exported}}</p>
-        <h4>{{exportDataName}}</h4>
+      <div *ngIf="show_callentry">
+      
+        <p class="h4">{{msg_export}}</p>
+      
+        <button (click)="downloadFile()" class="btn btn-outline-primary">Exportar data</button>
+      
+        <div class="container" *ngIf="msg_exported">
+          <p class="h4">{{msg_exported}}</p>
+          <h4>{{exportDataName}}</h4>
+        </div>
       </div>
+
+      
     </div>
 
-    <div *ngIf="show_callentry">
+    
+
+    <!-- <div *ngIf="show_callentry">
 
       <p class="h4">{{msg_export}}</p>
 
@@ -120,7 +121,7 @@
         <p class="h4">{{msg_audited}}</p>
         <h4>{{exportAuditName}}</h4>
       </div>
-    </div>
+    </div> -->
 
   </section>
 
